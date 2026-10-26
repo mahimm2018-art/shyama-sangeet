@@ -10,409 +10,483 @@
   <link href="https://fonts.googleapis.com/css2?family=Galada&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --primary: #8b1e0f;
-      --primary-light: #fbeee9;
-      --tag-raag: #7c2d12;
-      --tag-raag-bg: #ffedd5;
-      --tag-taal: #1e3a8a;
-      --tag-taal-bg: #dbeafe;
-      --bg: #f8f6f0;
-      --card-bg: #ffffff;
-      --text: #2a2220;
-      --text-muted: #6b5e59;
-      --border: #e6dfd5;
-      --sidebar-width: 310px;
-      --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-    }
+  :root {
+    --primary: #8b1e0f;
+    --primary-light: #fbeee9;
+    --accent: #b33927;
+    --tag-raag: #7c2d12;
+    --tag-raag-bg: #ffedd5;
+    --tag-taal: #1e3a8a;
+    --tag-taal-bg: #dbeafe;
+    --bg: #f8f6f0;
+    --card-bg: #ffffff;
+    --text: #2a2220;
+    --text-muted: #6b5e59;
+    --border: #e6dfd5;
+    --sidebar-width: 310px;
+    --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
+  body {
+    font-family: 'Noto Serif Bengali', serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    min-height: 100vh;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* =========================================
+     Sidebar & Navigation (Desktop & Mobile)
+     ========================================= */
+  #sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--card-bg);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1rem;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-header {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.85rem;
+  }
+
+  .sidebar-header h2 {
+    font-size: 1.25rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .song-counter {
+    font-size: 0.8rem;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  #sidebar-search {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    margin-top: 0.6rem;
+    transition: border-color 0.2s;
+  }
+
+  #sidebar-search:focus {
+    border-color: var(--primary);
+  }
+
+  #nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+  }
+
+  #nav-list li a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.9rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: 6px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease;
+  }
+
+  #nav-list li a:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* Backdrop for mobile drawer */
+  #sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+  }
+
+  /* =========================================
+     Main Layout & Hero Banner
+     ========================================= */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .hero-banner {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background-image: linear-gradient(to bottom, rgba(42, 34, 32, 0.45), rgba(42, 34, 32, 0.85)), 
+                      url('https://lh3.googleusercontent.com/d/1WDQK9n7bl679M0T9twS6FNTG_n2AiNNH');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-banner h1 {
+    font-family: 'Galada', cursive, 'Noto Serif Bengali', serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .hero-banner p {
+    font-size: 1rem;
+    opacity: 0.92;
+    max-width: 600px;
+  }
+
+  /* =========================================
+     Filter Toolbar Controls
+     ========================================= */
+  .controls-bar {
+    max-width: 900px;
+    width: 92%;
+    margin: -1.5rem auto 1.75rem auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+  }
+
+  .filter-select {
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    color: var(--text);
+    outline: none;
+  }
+
+  .filter-select:focus {
+    border-color: var(--primary);
+  }
+
+  .reset-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: inherit;
+    text-decoration: underline;
+  }
+
+  /* =========================================
+     Song Container & Focus Mode Banner
+     ========================================= */
+  .content-area {
+    max-width: 900px;
+    width: 92%;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+  }
+
+  .view-all-bar {
+    display: none;
+    background: var(--primary-light);
+    border: 1px solid #f2c7bc;
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--primary);
+  }
+
+  .view-all-btn {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+
+  .view-all-btn:hover {
+    background: var(--accent);
+  }
+
+  /* =========================================
+     Song Card & Typography
+     ========================================= */
+  .song-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.75rem;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+
+  .song-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.65rem;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .song-title {
+    font-size: 1.35rem;
+    color: var(--primary);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .song-meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+
+  .tag:hover {
+    opacity: 0.85;
+  }
+
+  .tag-raag {
+    background-color: var(--tag-raag-bg);
+    color: var(--tag-raag);
+    border: 1px solid #fed7aa;
+  }
+
+  .tag-taal {
+    background-color: var(--tag-taal-bg);
+    color: var(--tag-taal);
+    border: 1px solid #bfdbfe;
+  }
+
+  .tag-composer {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+    border: 1px solid #e9d5ff;
+  }
+
+  .lyrics {
+    white-space: pre-line;
+    font-size: 1.12rem;
+    line-height: 2.1;
+    color: #2b221f;
+    padding-left: 0.2rem;
+    word-break: break-word;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.25rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid #f6f2ec;
+  }
+
+  .nav-action-link {
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .nav-action-link:hover {
+    color: var(--primary);
+  }
+
+  /* =========================================
+     Floating Action Buttons (Home & Mobile TOC)
+     ========================================= */
+  #floating-home-btn {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.65rem 1.1rem;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  }
+
+  #floating-home-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  #floating-home-btn:hover {
+    background: var(--accent);
+  }
+
+  #mobile-menu-btn {
+    display: none;
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  /* =========================================
+     Responsive Media Queries
+     ========================================= */
+  @media (max-width: 860px) {
     body {
-      font-family: 'Noto Serif Bengali', serif;
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      min-height: 100vh;
-      line-height: 1.8;
-      overflow-x: hidden;
-    }
-
-    /* Sidebar Drawer Styles */
-    #sidebar {
-      width: var(--sidebar-width);
-      background-color: var(--card-bg);
-      border-right: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 1.25rem 1rem;
-      overflow-y: auto;
-      z-index: 100;
-      transition: transform 0.3s ease;
-    }
-
-    .sidebar-header {
-      padding-bottom: 0.85rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.85rem;
-    }
-
-    .sidebar-header h2 {
-      font-size: 1.25rem;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .song-counter {
-      font-size: 0.8rem;
-      background: var(--primary-light);
-      color: var(--primary);
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    #sidebar-search {
-      width: 100%;
-      padding: 0.6rem 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      outline: none;
-      margin-top: 0.6rem;
-    }
-
-    #sidebar-search:focus {
-      border-color: var(--primary);
-    }
-
-    #nav-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      overflow-y: auto;
-      padding-right: 0.2rem;
-    }
-
-    #nav-list li a {
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.9rem;
-      padding: 0.5rem 0.65rem;
-      border-radius: 6px;
       display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.2s;
     }
 
-    #nav-list li a:hover, #nav-list li a.active {
-      background-color: var(--primary-light);
-      color: var(--primary);
-      font-weight: 600;
+    #sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 82%;
+      max-width: 320px;
+      height: 100vh;
+      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.25);
+      transform: translateX(-105%);
     }
 
-    /* Main Container */
-    main {
-      flex: 1;
+    #sidebar.open {
+      transform: translateX(0);
+    }
+
+    #sidebar-backdrop.active {
+      display: block;
+    }
+
+    #mobile-menu-btn {
       display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    /* Hero Banner */
-    .hero-banner {
-      position: relative;
-      width: 100%;
-      height: 240px;
-      background-image: linear-gradient(to bottom, rgba(42, 34, 32, 0.45), rgba(42, 34, 32, 0.85)), 
-                        url('https://lh3.googleusercontent.com/d/1WDQK9n7bl679M0T9twS6FNTG_n2AiNNH');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      text-align: center;
-      padding: 1.5rem 1rem;
+      gap: 0.4rem;
+    }
+
+    #floating-home-btn {
+      bottom: 4.8rem;
+      right: 1.25rem;
+    }
+
+    .hero-banner {
+      height: 190px;
     }
 
     .hero-banner h1 {
-      font-family: 'Galada', cursive, 'Noto Serif Bengali', serif;
-      font-size: 2.5rem;
-      margin-bottom: 0.2rem;
+      font-size: 2rem;
     }
 
-    .hero-banner p {
-      font-size: 1rem;
-      opacity: 0.92;
-      max-width: 600px;
-    }
-
-    /* Controls Toolbar */
     .controls-bar {
-      max-width: 900px;
-      width: 92%;
-      margin: -1.5rem auto 1.75rem auto;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 5;
-    }
-
-    .filter-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem;
-      align-items: center;
-    }
-
-    .filter-select {
-      padding: 0.45rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      background-color: #fff;
-      color: var(--text);
-    }
-
-    .reset-btn {
-      background: none;
-      border: none;
-      color: var(--primary);
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-family: inherit;
-      text-decoration: underline;
-    }
-
-    /* Songs Area */
-    .content-area {
-      max-width: 900px;
-      width: 92%;
-      margin: 0 auto;
-      padding-bottom: 5rem;
+      margin-top: 1rem;
+      padding: 1rem;
     }
 
     .song-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.8rem 2rem;
-      margin-bottom: 1.75rem;
-      box-shadow: var(--shadow);
-      scroll-margin-top: 1.5rem;
-    }
-
-    .song-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.65rem;
-      border-bottom: 1px dashed var(--border);
-      padding-bottom: 0.75rem;
-      margin-bottom: 1.15rem;
+      padding: 1.25rem 1.2rem;
     }
 
     .song-title {
-      font-size: 1.35rem;
-      color: var(--primary);
-      font-weight: 700;
-      line-height: 1.4;
+      font-size: 1.2rem;
     }
-
-    .song-meta-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .tag {
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.2rem 0.6rem;
-      border-radius: 14px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .tag-raag { background-color: var(--tag-raag-bg); color: var(--tag-raag); border: 1px solid #fed7aa; }
-    .tag-taal { background-color: var(--tag-taal-bg); color: var(--tag-taal); border: 1px solid #bfdbfe; }
-    .tag-composer { background-color: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
 
     .lyrics {
-      white-space: pre-line;
-      font-size: 1.12rem;
-      line-height: 2.1;
-      color: #2b221f;
-      padding-left: 0.2rem;
-      word-break: break-word;
+      font-size: 1.05rem;
+      line-height: 1.95;
     }
-
-    .card-footer {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 1.25rem;
-      padding-top: 0.65rem;
-      border-top: 1px solid #f6f2ec;
-    }
-
-    .top-link {
-      font-size: 0.85rem;
-      text-decoration: none;
-      color: var(--text-muted);
-    }
-
-    /* Mobile Floating Index Trigger & Overlay */
-    #mobile-menu-btn {
-      display: none;
-      position: fixed;
-      bottom: 1.25rem;
-      right: 1.25rem;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.25rem;
-      border-radius: 30px;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 600;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    #sidebar-backdrop {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 90;
-    }
-
-    /* Prominent Single Song & Back Controls */
-    .view-all-bar {
-      display: none;
-      background: var(--primary-light);
-      border: 1px solid #f2c7bc;
-      border-radius: 8px;
-      padding: 0.75rem 1.25rem;
-      margin-bottom: 1.5rem;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.95rem;
-      color: var(--primary);
-    }
-
-    .view-all-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 0.4rem 0.9rem;
-      border-radius: 6px;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1.25rem;
-      margin-top: 1.25rem;
-      padding-top: 0.65rem;
-      border-top: 1px solid #f6f2ec;
-    }
-
-    .nav-action-link {
-      font-size: 0.85rem;
-      text-decoration: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .nav-action-link:hover {
-      color: var(--primary);
-    }
-
-    /* Responsive Queries */
-    @media (max-width: 860px) {
-      body { display: block; }
-
-      #sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 82%;
-        max-width: 320px;
-        height: 100vh;
-        box-shadow: 2px 0 16px rgba(0,0,0,0.25);
-        transform: translateX(-105%);
-      }
-
-      #sidebar.open {
-        transform: translateX(0);
-      }
-
-      #sidebar-backdrop.active {
-        display: block;
-      }
-
-      #mobile-menu-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-      }
-
-      .hero-banner {
-        height: 190px;
-      }
-      .hero-banner h1 {
-        font-size: 2rem;
-      }
-
-      .controls-bar {
-        margin-top: 1rem;
-        padding: 1rem;
-      }
-
-      .song-card {
-        padding: 1.25rem 1.2rem;
-      }
-
-      .song-title {
-        font-size: 1.2rem;
-      }
-
-      .lyrics {
-        font-size: 1.05rem;
-        line-height: 1.95;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
@@ -962,166 +1036,258 @@
   }
 ];
 
-    let currentFilter = { raag: "", taal: "", search: "", selectedSongId: null };
+// ============================================================================
+// 1. DATA SOURCE
+// Keep your existing array of songs here:
+// const songs = [ ... ];
+// ============================================================================
 
-    function initPage() {
-      populateDropdowns();
-      renderSidebar();
-      renderApp();
+// State Management
+let currentFilter = {
+  raag: "",
+  taal: "",
+  sidebarSearch: "",
+  selectedSongId: null
+};
+
+// Initialize Application
+function initPage() {
+  ensureFloatingHomeButton();
+  populateDropdowns();
+  renderSidebar();
+  renderApp();
+  setupScrollListener();
+}
+
+// Ensure the floating home button exists in DOM if not already in HTML
+function ensureFloatingHomeButton() {
+  if (!document.getElementById("floating-home-btn")) {
+    const btn = document.createElement("button");
+    btn.id = "floating-home-btn";
+    btn.innerHTML = "⌂ হোম (উপরে যান)";
+    btn.onclick = scrollToTop;
+    document.body.appendChild(btn);
+  }
+}
+
+// Mobile Drawer Toggle
+function toggleMobileSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sidebar-backdrop");
+  if (sidebar && backdrop) {
+    const isOpen = sidebar.classList.toggle("open");
+    backdrop.classList.toggle("active", isOpen);
+  }
+}
+
+// Populate Raga and Tala filter menus
+function populateDropdowns() {
+  const raagSelect = document.getElementById("raag-filter");
+  const taalSelect = document.getElementById("taal-filter");
+
+  if (!raagSelect || !taalSelect) return;
+
+  const raags = [...new Set(songs.map(s => s.raag).filter(r => r && r !== "অনির্দিষ্ট"))].sort();
+  const taals = [...new Set(songs.map(s => s.taal).filter(t => t && t !== "অনির্দিষ্ট"))].sort();
+
+  raags.forEach(r => {
+    raagSelect.innerHTML += `<option value="${r}">${r}</option>`;
+  });
+  taals.forEach(t => {
+    taalSelect.innerHTML += `<option value="${t}">${t}</option>`;
+  });
+}
+
+// Scroll Listener: Displays the Home button ONLY in 'all songs' mode when scrolled down
+function setupScrollListener() {
+  window.addEventListener("scroll", () => {
+    const homeBtn = document.getElementById("floating-home-btn");
+    if (!homeBtn) return;
+
+    const isSingleSongActive = Boolean(currentFilter.selectedSongId);
+    const hasScrolledDown = window.scrollY > 320;
+
+    // Condition 1 & 2: Only show when all songs are visible AND scrolled down
+    if (!isSingleSongActive && hasScrolledDown) {
+      homeBtn.classList.add("visible");
+    } else {
+      homeBtn.classList.remove("visible");
     }
+  });
+}
 
-    function toggleMobileSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      const backdrop = document.getElementById("sidebar-backdrop");
-      const isOpen = sidebar.classList.toggle("open");
-      backdrop.classList.toggle("active", isOpen);
-    }
+// Scroll to top
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-    function populateDropdowns() {
-      const raags = [...new Set(songs.map(s => s.raag).filter(r => r && r !== "অনির্দিষ্ট"))].sort();
-      const taals = [...new Set(songs.map(s => s.taal).filter(t => t && t !== "অনির্দিষ্ট"))].sort();
+// Sidebar Navigation: Always displays all songs (filtered only if typing in the sidebar search)
+function renderSidebar(query = "") {
+  const navList = document.getElementById("nav-list");
+  if (!navList) return;
 
-      const raagSelect = document.getElementById("raag-filter");
-      const taalSelect = document.getElementById("taal-filter");
+  navList.innerHTML = "";
+  const q = query.toLowerCase().trim();
 
-      raags.forEach(r => raagSelect.innerHTML += `<option value="${r}">${r}</option>`);
-      taals.forEach(t => taalSelect.innerHTML += `<option value="${t}">${t}</option>`);
-    }
+  const matchedSongs = songs.filter(song => {
+    return !q || song.title.toLowerCase().includes(q) || song.raag.toLowerCase().includes(q);
+  });
 
-    // 1. Sidebar index ALWAYS shows all songs (filtered only by the quick search bar if typed)
-    function renderSidebar(sidebarSearchQuery = "") {
-      const navList = document.getElementById("nav-list");
-      navList.innerHTML = "";
-      const q = sidebarSearchQuery.toLowerCase().trim();
-
-      const sidebarItems = songs.filter(s => {
-        return !q || s.title.toLowerCase().includes(q) || s.raag.toLowerCase().includes(q);
-      });
-
-      sidebarItems.forEach((song) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = "javascript:void(0)";
-        a.innerText = song.title;
-        a.onclick = () => {
-          selectSingleSong(song.id);
-          if (window.innerWidth <= 860) toggleMobileSidebar();
-        };
-        li.appendChild(a);
-        navList.appendChild(li);
-      });
-    }
-
-    // 2. Select and display single song focus view
-    function selectSingleSong(songId) {
-      currentFilter.selectedSongId = songId;
-      renderApp();
-      const target = document.getElementById(songId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  matchedSongs.forEach(song => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "javascript:void(0)";
+    a.innerText = song.title;
+    a.onclick = () => {
+      selectSingleSong(song.id);
+      if (window.innerWidth <= 860) {
+        toggleMobileSidebar();
       }
+    };
+    li.appendChild(a);
+    navList.appendChild(li);
+  });
+}
+
+// Triggered when user selects a song from the index
+function selectSingleSong(songId) {
+  currentFilter.selectedSongId = songId;
+  renderApp();
+
+  // Hide the floating home button immediately in single-song mode
+  const homeBtn = document.getElementById("floating-home-btn");
+  if (homeBtn) homeBtn.classList.remove("visible");
+
+  const target = document.getElementById(songId);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+// Restore full song list view
+function showAllSongs() {
+  currentFilter.selectedSongId = null;
+  renderApp();
+}
+
+// Main Content Renderer
+function renderApp() {
+  const container = document.getElementById("song-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  // Single Song Banner with "Show All" toggle
+  if (currentFilter.selectedSongId) {
+    const banner = document.createElement("div");
+    banner.className = "view-all-bar";
+    banner.style.display = "flex";
+    banner.innerHTML = `
+      <span>একটি নির্বাচিত গীতি প্রদর্শিত হচ্ছে</span>
+      <button class="view-all-btn" onclick="showAllSongs()">সকল গীতি প্রদর্শন করুন</button>
+    `;
+    container.appendChild(banner);
+  }
+
+  // Determine items to display
+  const filtered = songs.filter(song => {
+    if (currentFilter.selectedSongId) {
+      return song.id === currentFilter.selectedSongId;
     }
+    const matchesRaag = !currentFilter.raag || song.raag === currentFilter.raag;
+    const matchesTaal = !currentFilter.taal || song.taal === currentFilter.taal;
+    return matchesRaag && matchesTaal;
+  });
 
-    function showAllSongs() {
-      currentFilter.selectedSongId = null;
-      renderApp();
-    }
+  const counterElem = document.getElementById("song-count");
+  if (counterElem) {
+    counterElem.innerText = `${currentFilter.selectedSongId ? 1 : filtered.length}টি গান`;
+  }
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  if (filtered.length === 0) {
+    container.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--text-muted);">কোনো পদ পাওয়া যায়নি।</div>`;
+    return;
+  }
 
-    // 3. Main content rendering
-    function renderApp() {
-      const container = document.getElementById("song-container");
-      container.innerHTML = "";
+  // Render song cards
+  filtered.forEach(song => {
+    const card = document.createElement("article");
+    card.className = "song-card";
+    card.id = song.id;
+    card.innerHTML = `
+      <div class="song-header">
+        <h3 class="song-title">${song.title}</h3>
+        <div class="song-meta-tags">
+          <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')">রাগ: ${song.raag}</span>
+          <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')">তাল: ${song.taal}</span>
+          <span class="tag tag-composer">${song.composer}</span>
+        </div>
+      </div>
+      <div class="lyrics">${song.lyrics}</div>
+      <div class="card-footer">
+        <a href="javascript:void(0)" class="nav-action-link" onclick="handleIndexReturn()">↑ সূচিপত্রে ফিরে যান</a>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
 
-      // Single Song Mode View Banner
-      if (currentFilter.selectedSongId) {
-        const banner = document.createElement("div");
-        banner.className = "view-all-bar";
-        banner.style.display = "flex";
-        banner.innerHTML = `
-          <span>একটি নির্বাচিত গীতি প্রদর্শিত হচ্ছে</span>
-          <button class="view-all-btn" onclick="showAllSongs()">সকল গীতি প্রদর্শন করুন</button>
-        `;
-        container.appendChild(banner);
-      }
+// Return to Table of Contents handler
+function handleIndexReturn() {
+  if (window.innerWidth <= 860) {
+    toggleMobileSidebar();
+  } else {
+    const searchInput = document.getElementById("sidebar-search");
+    if (searchInput) searchInput.focus();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
 
-      const filtered = songs.filter(song => {
-        if (currentFilter.selectedSongId) {
-          return song.id === currentFilter.selectedSongId;
-        }
-        const matchesRaag = !currentFilter.raag || song.raag === currentFilter.raag;
-        const matchesTaal = !currentFilter.taal || song.taal === currentFilter.taal;
-        const q = currentFilter.search.toLowerCase();
-        const matchesSearch = !q || 
-                              song.title.toLowerCase().includes(q) || 
-                              song.raag.toLowerCase().includes(q) || 
-                              song.taal.toLowerCase().includes(q) || 
-                              song.composer.toLowerCase().includes(q) ||
-                              song.lyrics.toLowerCase().includes(q);
-        return matchesRaag && matchesTaal && matchesSearch;
-      });
+// Tag-based filtering
+function filterByTag(type, value) {
+  currentFilter.selectedSongId = null;
+  if (type === "raag") {
+    currentFilter.raag = value;
+    const raagSelect = document.getElementById("raag-filter");
+    if (raagSelect) raagSelect.value = value;
+  } else if (type === "taal") {
+    currentFilter.taal = value;
+    const taalSelect = document.getElementById("taal-filter");
+    if (taalSelect) taalSelect.value = value;
+  }
+  renderApp();
+}
 
-      document.getElementById("song-count").innerText = `${currentFilter.selectedSongId ? 1 : filtered.length}টি গান`;
+// Dropdown filter change
+function filterByDropdown() {
+  currentFilter.selectedSongId = null;
+  const raagSelect = document.getElementById("raag-filter");
+  const taalSelect = document.getElementById("taal-filter");
+  currentFilter.raag = raagSelect ? raagSelect.value : "";
+  currentFilter.taal = taalSelect ? taalSelect.value : "";
+  renderApp();
+}
 
-      filtered.forEach((song) => {
-        const card = document.createElement("article");
-        card.className = "song-card";
-        card.id = song.id;
-        card.innerHTML = `
-          <div class="song-header">
-            <h3 class="song-title">${song.title}</h3>
-            <div class="song-meta-tags">
-              <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')">রাগ: ${song.raag}</span>
-              <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')">তাল: ${song.taal}</span>
-              <span class="tag tag-composer">${song.composer}</span>
-            </div>
-          </div>
-          <div class="lyrics">${song.lyrics}</div>
-          <div class="card-footer">
-            <a href="javascript:void(0)" class="nav-action-link" onclick="scrollToTop()">⌂ হোম (উপরে যান)</a>
-            <a href="javascript:void(0)" class="nav-action-link" onclick="if(window.innerWidth<=860){toggleMobileSidebar();}else{document.getElementById('sidebar-search').focus();}">↑ সূচিপত্র</a>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
+// Sidebar search input
+function handleSearch(val) {
+  renderSidebar(val);
+}
 
-    function filterByTag(type, value) {
-      currentFilter.selectedSongId = null;
-      if (type === 'raag') {
-        currentFilter.raag = value;
-        document.getElementById("raag-filter").value = value;
-      } else if (type === 'taal') {
-        currentFilter.taal = value;
-        document.getElementById("taal-filter").value = value;
-      }
-      renderApp();
-    }
+// Reset all filters and selection
+function resetFilters() {
+  currentFilter = { raag: "", taal: "", sidebarSearch: "", selectedSongId: null };
+  const raagSelect = document.getElementById("raag-filter");
+  const taalSelect = document.getElementById("taal-filter");
+  const searchInput = document.getElementById("sidebar-search");
 
-    function filterByDropdown() {
-      currentFilter.selectedSongId = null;
-      currentFilter.raag = document.getElementById("raag-filter").value;
-      currentFilter.taal = document.getElementById("taal-filter").value;
-      renderApp();
-    }
+  if (raagSelect) raagSelect.value = "";
+  if (taalSelect) taalSelect.value = "";
+  if (searchInput) searchInput.value = "";
 
-    function handleSearch(val) {
-      renderSidebar(val);
-    }
+  renderSidebar();
+  renderApp();
+}
 
-    function resetFilters() {
-      currentFilter = { raag: "", taal: "", search: "", selectedSongId: null };
-      document.getElementById("raag-filter").value = "";
-      document.getElementById("taal-filter").value = "";
-      document.getElementById("sidebar-search").value = "";
-      renderSidebar();
-      renderApp();
-    }
-
-    window.onload = initPage;
+window.onload = initPage;
   </script>
 </body>
 </html>
