@@ -311,6 +311,52 @@
       z-index: 90;
     }
 
+    /* Prominent Single Song & Back Controls */
+    .view-all-bar {
+      display: none;
+      background: var(--primary-light);
+      border: 1px solid #f2c7bc;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .view-all-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid #f6f2ec;
+    }
+
+    .nav-action-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav-action-link:hover {
+      color: var(--primary);
+    }
+
     /* Responsive Queries */
     @media (max-width: 860px) {
       body { display: block; }
@@ -917,10 +963,11 @@
   }
 ];
 
-    let currentFilter = { raag: "", taal: "", search: "" };
+    let currentFilter = { raag: "", taal: "", search: "", selectedSongId: null };
 
     function initPage() {
       populateDropdowns();
+      renderSidebar();
       renderApp();
     }
 
@@ -942,13 +989,70 @@
       taals.forEach(t => taalSelect.innerHTML += `<option value="${t}">${t}</option>`);
     }
 
+    // 1. Sidebar index ALWAYS shows all songs (filtered only by the quick search bar if typed)
+    function renderSidebar(sidebarSearchQuery = "") {
+      const navList = document.getElementById("nav-list");
+      navList.innerHTML = "";
+      const q = sidebarSearchQuery.toLowerCase().trim();
+
+      const sidebarItems = songs.filter(s => {
+        return !q || s.title.toLowerCase().includes(q) || s.raag.toLowerCase().includes(q);
+      });
+
+      sidebarItems.forEach((song) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "javascript:void(0)";
+        a.innerText = song.title;
+        a.onclick = () => {
+          selectSingleSong(song.id);
+          if (window.innerWidth <= 860) toggleMobileSidebar();
+        };
+        li.appendChild(a);
+        navList.appendChild(li);
+      });
+    }
+
+    // 2. Select and display single song focus view
+    function selectSingleSong(songId) {
+      currentFilter.selectedSongId = songId;
+      renderApp();
+      const target = document.getElementById(songId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function showAllSongs() {
+      currentFilter.selectedSongId = null;
+      renderApp();
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 3. Main content rendering
     function renderApp() {
       const container = document.getElementById("song-container");
-      const navList = document.getElementById("nav-list");
       container.innerHTML = "";
-      navList.innerHTML = "";
+
+      // Single Song Mode View Banner
+      if (currentFilter.selectedSongId) {
+        const banner = document.createElement("div");
+        banner.className = "view-all-bar";
+        banner.style.display = "flex";
+        banner.innerHTML = `
+          <span>একটি নির্বাচিত গীতি প্রদর্শিত হচ্ছে</span>
+          <button class="view-all-btn" onclick="showAllSongs()">সকল গীতি প্রদর্শন করুন</button>
+        `;
+        container.appendChild(banner);
+      }
 
       const filtered = songs.filter(song => {
+        if (currentFilter.selectedSongId) {
+          return song.id === currentFilter.selectedSongId;
+        }
         const matchesRaag = !currentFilter.raag || song.raag === currentFilter.raag;
         const matchesTaal = !currentFilter.taal || song.taal === currentFilter.taal;
         const q = currentFilter.search.toLowerCase();
@@ -961,19 +1065,9 @@
         return matchesRaag && matchesTaal && matchesSearch;
       });
 
-      document.getElementById("song-count").innerText = `${filtered.length}টি গান`;
+      document.getElementById("song-count").innerText = `${currentFilter.selectedSongId ? 1 : filtered.length}টি গান`;
 
       filtered.forEach((song) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = `#${song.id}`;
-        a.innerText = song.title;
-        a.onclick = () => {
-          if (window.innerWidth <= 860) toggleMobileSidebar();
-        };
-        li.appendChild(a);
-        navList.appendChild(li);
-
         const card = document.createElement("article");
         card.className = "song-card";
         card.id = song.id;
@@ -988,7 +1082,8 @@
           </div>
           <div class="lyrics">${song.lyrics}</div>
           <div class="card-footer">
-            <a href="#sidebar" class="top-link" onclick="if(window.innerWidth<=860) toggleMobileSidebar()">↑ সূচিপত্রে ফিরে যান</a>
+            <a href="javascript:void(0)" class="nav-action-link" onclick="scrollToTop()">⌂ হোম (উপরে যান)</a>
+            <a href="javascript:void(0)" class="nav-action-link" onclick="if(window.innerWidth<=860){toggleMobileSidebar();}else{document.getElementById('sidebar-search').focus();}">↑ সূচিপত্র</a>
           </div>
         `;
         container.appendChild(card);
@@ -996,6 +1091,7 @@
     }
 
     function filterByTag(type, value) {
+      currentFilter.selectedSongId = null;
       if (type === 'raag') {
         currentFilter.raag = value;
         document.getElementById("raag-filter").value = value;
@@ -1007,21 +1103,22 @@
     }
 
     function filterByDropdown() {
+      currentFilter.selectedSongId = null;
       currentFilter.raag = document.getElementById("raag-filter").value;
       currentFilter.taal = document.getElementById("taal-filter").value;
       renderApp();
     }
 
     function handleSearch(val) {
-      currentFilter.search = val;
-      renderApp();
+      renderSidebar(val);
     }
 
     function resetFilters() {
-      currentFilter = { raag: "", taal: "", search: "" };
+      currentFilter = { raag: "", taal: "", search: "", selectedSongId: null };
       document.getElementById("raag-filter").value = "";
       document.getElementById("taal-filter").value = "";
       document.getElementById("sidebar-search").value = "";
+      renderSidebar();
       renderApp();
     }
 
