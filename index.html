@@ -420,6 +420,20 @@
     cursor: pointer;
     z-index: 1000;
   }
+    
+    .tag-composer {
+      background-color: #f3e8ff;
+      color: #6b21a8;
+      border: 1px solid #e9d5ff;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .tag-composer:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
 
   /* =========================================
      Responsive Media Queries
@@ -520,9 +534,15 @@
         <select id="taal-filter" class="filter-select" onchange="filterByDropdown()">
           <option value="">সকল তাল</option>
         </select>
+
+        <!-- নতুন রচয়িতা ফিল্টার -->
+        <label for="composer-filter">রচয়িতা:</label>
+        <select id="composer-filter" class="filter-select" onchange="filterByDropdown()">
+          <option value="">সকল রচয়িতা</option>
+        </select>
       </div>
 
-      <button class="reset-btn" onclick="resetFilters()">রিসেট ফিল্টারস</button>
+      <button class="reset-btn" onclick="resetFilters()">সব দেখান</button>
     </section>
 
     <section class="content-area" id="song-container"></section>
@@ -1043,14 +1063,15 @@
 // ============================================================================
 
 // State Management
+// স্টেট ম্যানেজমেন্টে composer যোগ করা হয়েছে
 let currentFilter = {
   raag: "",
   taal: "",
+  composer: "",
   sidebarSearch: "",
   selectedSongId: null
 };
 
-// Initialize Application
 function initPage() {
   ensureFloatingHomeButton();
   populateDropdowns();
@@ -1059,7 +1080,6 @@ function initPage() {
   setupScrollListener();
 }
 
-// Ensure the floating home button exists in DOM if not already in HTML
 function ensureFloatingHomeButton() {
   if (!document.getElementById("floating-home-btn")) {
     const btn = document.createElement("button");
@@ -1070,7 +1090,6 @@ function ensureFloatingHomeButton() {
   }
 }
 
-// Mobile Drawer Toggle
 function toggleMobileSidebar() {
   const sidebar = document.getElementById("sidebar");
   const backdrop = document.getElementById("sidebar-backdrop");
@@ -1080,25 +1099,23 @@ function toggleMobileSidebar() {
   }
 }
 
-// Populate Raga and Tala filter menus
+// রাগ, তাল এবং রচয়িতার ড্রপডাউন তৈরি
 function populateDropdowns() {
   const raagSelect = document.getElementById("raag-filter");
   const taalSelect = document.getElementById("taal-filter");
+  const composerSelect = document.getElementById("composer-filter");
 
-  if (!raagSelect || !taalSelect) return;
+  if (!raagSelect || !taalSelect || !composerSelect) return;
 
   const raags = [...new Set(songs.map(s => s.raag).filter(r => r && r !== "অনির্দিষ্ট"))].sort();
   const taals = [...new Set(songs.map(s => s.taal).filter(t => t && t !== "অনির্দিষ্ট"))].sort();
+  const composers = [...new Set(songs.map(s => s.composer).filter(c => c))].sort();
 
-  raags.forEach(r => {
-    raagSelect.innerHTML += `<option value="${r}">${r}</option>`;
-  });
-  taals.forEach(t => {
-    taalSelect.innerHTML += `<option value="${t}">${t}</option>`;
-  });
+  raags.forEach(r => raagSelect.innerHTML += `<option value="${r}">${r}</option>`);
+  taals.forEach(t => taalSelect.innerHTML += `<option value="${t}">${t}</option>`);
+  composers.forEach(c => composerSelect.innerHTML += `<option value="${c}">${c}</option>`);
 }
 
-// Scroll Listener: Displays the Home button ONLY in 'all songs' mode when scrolled down
 function setupScrollListener() {
   window.addEventListener("scroll", () => {
     const homeBtn = document.getElementById("floating-home-btn");
@@ -1107,7 +1124,6 @@ function setupScrollListener() {
     const isSingleSongActive = Boolean(currentFilter.selectedSongId);
     const hasScrolledDown = window.scrollY > 320;
 
-    // Condition 1 & 2: Only show when all songs are visible AND scrolled down
     if (!isSingleSongActive && hasScrolledDown) {
       homeBtn.classList.add("visible");
     } else {
@@ -1116,12 +1132,10 @@ function setupScrollListener() {
   });
 }
 
-// Scroll to top
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Sidebar Navigation: Always displays all songs (filtered only if typing in the sidebar search)
 function renderSidebar(query = "") {
   const navList = document.getElementById("nav-list");
   if (!navList) return;
@@ -1130,7 +1144,7 @@ function renderSidebar(query = "") {
   const q = query.toLowerCase().trim();
 
   const matchedSongs = songs.filter(song => {
-    return !q || song.title.toLowerCase().includes(q) || song.raag.toLowerCase().includes(q);
+    return !q || song.title.toLowerCase().includes(q) || song.raag.toLowerCase().includes(q) || song.composer.toLowerCase().includes(q);
   });
 
   matchedSongs.forEach(song => {
@@ -1140,21 +1154,17 @@ function renderSidebar(query = "") {
     a.innerText = song.title;
     a.onclick = () => {
       selectSingleSong(song.id);
-      if (window.innerWidth <= 860) {
-        toggleMobileSidebar();
-      }
+      if (window.innerWidth <= 860) toggleMobileSidebar();
     };
     li.appendChild(a);
     navList.appendChild(li);
   });
 }
 
-// Triggered when user selects a song from the index
 function selectSingleSong(songId) {
   currentFilter.selectedSongId = songId;
   renderApp();
 
-  // Hide the floating home button immediately in single-song mode
   const homeBtn = document.getElementById("floating-home-btn");
   if (homeBtn) homeBtn.classList.remove("visible");
 
@@ -1164,19 +1174,16 @@ function selectSingleSong(songId) {
   }
 }
 
-// Restore full song list view
 function showAllSongs() {
   currentFilter.selectedSongId = null;
   renderApp();
 }
 
-// Main Content Renderer
 function renderApp() {
   const container = document.getElementById("song-container");
   if (!container) return;
   container.innerHTML = "";
 
-  // Single Song Banner with "Show All" toggle
   if (currentFilter.selectedSongId) {
     const banner = document.createElement("div");
     banner.className = "view-all-bar";
@@ -1188,14 +1195,15 @@ function renderApp() {
     container.appendChild(banner);
   }
 
-  // Determine items to display
+  // রাগ, তাল ও রচয়িতা ফিল্টারিং শর্ত
   const filtered = songs.filter(song => {
     if (currentFilter.selectedSongId) {
       return song.id === currentFilter.selectedSongId;
     }
     const matchesRaag = !currentFilter.raag || song.raag === currentFilter.raag;
     const matchesTaal = !currentFilter.taal || song.taal === currentFilter.taal;
-    return matchesRaag && matchesTaal;
+    const matchesComposer = !currentFilter.composer || song.composer === currentFilter.composer;
+    return matchesRaag && matchesTaal && matchesComposer;
   });
 
   const counterElem = document.getElementById("song-count");
@@ -1208,7 +1216,6 @@ function renderApp() {
     return;
   }
 
-  // Render song cards
   filtered.forEach(song => {
     const card = document.createElement("article");
     card.className = "song-card";
@@ -1217,9 +1224,9 @@ function renderApp() {
       <div class="song-header">
         <h3 class="song-title">${song.title}</h3>
         <div class="song-meta-tags">
-          <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')">রাগ: ${song.raag}</span>
-          <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')">তাল: ${song.taal}</span>
-          <span class="tag tag-composer">${song.composer}</span>
+          <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')" title="রাগে ফিল্টার করুন">রাগ: ${song.raag}</span>
+          <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')" title="তালে ফিল্টার করুন">তাল: ${song.taal}</span>
+          <span class="tag tag-composer" onclick="filterByTag('composer', '${song.composer}')" title="রচয়িতায় ফিল্টার করুন">${song.composer}</span>
         </div>
       </div>
       <div class="lyrics">${song.lyrics}</div>
@@ -1231,7 +1238,6 @@ function renderApp() {
   });
 }
 
-// Return to Table of Contents handler
 function handleIndexReturn() {
   if (window.innerWidth <= 860) {
     toggleMobileSidebar();
@@ -1242,7 +1248,7 @@ function handleIndexReturn() {
   }
 }
 
-// Tag-based filtering
+// ট্যাগ ক্লিকের ফিল্টার হ্যান্ডলার (raag, taal, composer)
 function filterByTag(type, value) {
   currentFilter.selectedSongId = null;
   if (type === "raag") {
@@ -1253,34 +1259,43 @@ function filterByTag(type, value) {
     currentFilter.taal = value;
     const taalSelect = document.getElementById("taal-filter");
     if (taalSelect) taalSelect.value = value;
+  } else if (type === "composer") {
+    currentFilter.composer = value;
+    const composerSelect = document.getElementById("composer-filter");
+    if (composerSelect) composerSelect.value = value;
   }
   renderApp();
+  scrollToTop();
 }
 
-// Dropdown filter change
+// ড্রপডাউন পরিবর্তনের ফিল্টার হ্যান্ডলার
 function filterByDropdown() {
   currentFilter.selectedSongId = null;
   const raagSelect = document.getElementById("raag-filter");
   const taalSelect = document.getElementById("taal-filter");
+  const composerSelect = document.getElementById("composer-filter");
+
   currentFilter.raag = raagSelect ? raagSelect.value : "";
   currentFilter.taal = taalSelect ? taalSelect.value : "";
+  currentFilter.composer = composerSelect ? composerSelect.value : "";
   renderApp();
 }
 
-// Sidebar search input
 function handleSearch(val) {
   renderSidebar(val);
 }
 
-// Reset all filters and selection
+// ফিল্টার রিসেট
 function resetFilters() {
-  currentFilter = { raag: "", taal: "", sidebarSearch: "", selectedSongId: null };
+  currentFilter = { raag: "", taal: "", composer: "", sidebarSearch: "", selectedSongId: null };
   const raagSelect = document.getElementById("raag-filter");
   const taalSelect = document.getElementById("taal-filter");
+  const composerSelect = document.getElementById("composer-filter");
   const searchInput = document.getElementById("sidebar-search");
 
   if (raagSelect) raagSelect.value = "";
   if (taalSelect) taalSelect.value = "";
+  if (composerSelect) composerSelect.value = "";
   if (searchInput) searchInput.value = "";
 
   renderSidebar();
