@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>শ্যামাসঙ্গীত ও ভক্তিমূলক গীতি সংকলন</title>
+  <title>শ্যামাসঙ্গীত সংকলন</title>
   
-  <!-- Bengali Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Galada&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,7 +13,6 @@
     :root {
       --primary: #8b1e0f;
       --primary-light: #fbeee9;
-      --accent: #b33927;
       --tag-raag: #7c2d12;
       --tag-raag-bg: #ffedd5;
       --tag-taal: #1e3a8a;
@@ -28,11 +26,7 @@
       --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Noto Serif Bengali', serif;
@@ -43,7 +37,6 @@
       line-height: 1.8;
     }
 
-    /* Sidebar Navigation */
     #sidebar {
       width: var(--sidebar-width);
       background-color: var(--card-bg);
@@ -90,11 +83,6 @@
       font-size: 0.95rem;
       outline: none;
       margin-top: 0.75rem;
-      transition: border-color 0.2s;
-    }
-
-    #sidebar-search:focus {
-      border-color: var(--primary);
     }
 
     #nav-list {
@@ -124,7 +112,6 @@
       padding-left: 0.85rem;
     }
 
-    /* Main Container */
     main {
       flex: 1;
       display: flex;
@@ -132,7 +119,6 @@
       min-width: 0;
     }
 
-    /* Hero Banner */
     .hero-banner {
       position: relative;
       width: 100%;
@@ -153,18 +139,9 @@
     .hero-banner h1 {
       font-family: 'Galada', cursive, 'Noto Serif Bengali', serif;
       font-size: 2.8rem;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
       margin-bottom: 0.25rem;
     }
 
-    .hero-banner p {
-      font-size: 1.15rem;
-      opacity: 0.92;
-      max-width: 650px;
-    }
-
-    /* Filter & Controls Toolbar */
     .controls-bar {
       max-width: 950px;
       width: 92%;
@@ -179,7 +156,6 @@
       gap: 1rem;
       align-items: center;
       justify-content: space-between;
-      position: relative;
       z-index: 5;
     }
 
@@ -197,25 +173,6 @@
       font-family: inherit;
       font-size: 0.9rem;
       background-color: #fff;
-      color: var(--text);
-      cursor: pointer;
-      outline: none;
-    }
-
-    .filter-select:focus {
-      border-color: var(--primary);
-    }
-
-    .active-filter-badge {
-      display: none;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      background: var(--primary-light);
-      color: var(--primary);
-      padding: 0.35rem 0.75rem;
-      border-radius: 20px;
-      font-weight: 600;
     }
 
     .reset-btn {
@@ -228,7 +185,6 @@
       text-decoration: underline;
     }
 
-    /* Content Area */
     .content-area {
       max-width: 950px;
       width: 92%;
@@ -236,7 +192,6 @@
       padding-bottom: 4rem;
     }
 
-    /* Song Card */
     .song-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -245,11 +200,6 @@
       margin-bottom: 2rem;
       box-shadow: var(--shadow);
       scroll-margin-top: 2rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .song-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     .song-header {
@@ -281,37 +231,16 @@
       padding: 0.25rem 0.65rem;
       border-radius: 16px;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
       user-select: none;
     }
 
-    .tag:hover {
-      opacity: 0.85;
-      transform: translateY(-1px);
-    }
-
-    .tag-raag {
-      background-color: var(--tag-raag-bg);
-      color: var(--tag-raag);
-      border: 1px solid #fed7aa;
-    }
-
-    .tag-taal {
-      background-color: var(--tag-taal-bg);
-      color: var(--tag-taal);
-      border: 1px solid #bfdbfe;
-    }
-
-    .tag-composer {
-      background-color: #f3e8ff;
-      color: #6b21a8;
-      border: 1px solid #e9d5ff;
-    }
+    .tag-raag { background-color: var(--tag-raag-bg); color: var(--tag-raag); border: 1px solid #fed7aa; }
+    .tag-taal { background-color: var(--tag-taal-bg); color: var(--tag-taal); border: 1px solid #bfdbfe; }
+    .tag-composer { background-color: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
 
     .lyrics {
       white-space: pre-line;
       font-size: 1.15rem;
-      color: #332a28;
       line-height: 2.1;
       padding-left: 0.5rem;
     }
@@ -328,48 +257,19 @@
       font-size: 0.85rem;
       text-decoration: none;
       color: var(--text-muted);
-      transition: color 0.2s;
     }
 
-    .top-link:hover {
-      color: var(--primary);
-    }
-
-    .no-results {
-      text-align: center;
-      padding: 4rem 1rem;
-      color: var(--text-muted);
-      font-size: 1.2rem;
-    }
-
-    /* Responsive */
     @media (max-width: 860px) {
-      body {
-        flex-direction: column;
-      }
-      #sidebar {
-        width: 100%;
-        height: auto;
-        max-height: 280px;
-        position: relative;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-      .controls-bar {
-        margin-top: 1rem;
-      }
-      .hero-banner {
-        height: 220px;
-      }
-      .hero-banner h1 {
-        font-size: 2.1rem;
-      }
+      body { flex-direction: column; }
+      #sidebar { width: 100%; height: auto; max-height: 280px; position: relative; border-right: none; }
+      .controls-bar { margin-top: 1rem; }
+      .hero-banner { height: 220px; }
+      .hero-banner h1 { font-size: 2.1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Sidebar -->
   <aside id="sidebar">
     <div class="sidebar-header">
       <h2>পদাবলী সূচী <span id="song-count" class="song-counter">০টি</span></h2>
@@ -378,15 +278,12 @@
     <ul id="nav-list"></ul>
   </aside>
 
-  <!-- Main Body -->
   <main>
-    <!-- Hero Banner with Drive Image -->
     <header class="hero-banner">
       <h1>শ্যামাসঙ্গীত সংকলন</h1>
       <p>শাস্ত্রীয় রাগ, তাল ও ভাবাশ্রিত ভক্তিমূলক পদাবলীর ডিজিটাল সংগ্রহাগার</p>
     </header>
 
-    <!-- Toolbar Filters -->
     <section class="controls-bar">
       <div class="filter-group">
         <label for="raag-filter">রাগ:</label>
@@ -398,69 +295,529 @@
         <select id="taal-filter" class="filter-select" onchange="filterByDropdown()">
           <option value="">সকল তাল</option>
         </select>
-
-        <div id="filter-indicator" class="active-filter-badge">
-          <span id="active-filter-text"></span>
-          <button class="reset-btn" onclick="resetFilters()">✕ বাতিল</button>
-        </div>
       </div>
 
       <button class="reset-btn" onclick="resetFilters()">সব দেখান</button>
     </section>
 
-    <!-- Song List Container -->
     <section class="content-area" id="song-container"></section>
   </main>
 
   <script>
-    // Repository Data: First 5 Songs (Ready for full 65 song expansion)
     const songs = [
-      {
-        id: "song-1",
-        title: "আশাবাস ঘোর-তমোনাশা বামা কে",
-        raag: "বেহাগ",
-        taal: "কাওয়ালী",
-        composer: "রামপ্রসাদ",
-        summary: "দেবী কালিকার রণরঙ্গিণী মোহিনী রূপের বন্দনা এবং সংসারের মোহান্ধকার দূরীকরণে মায়ের অভয়প্রার্থনা।",
-        lyricsSample: "আশাবাস ঘোর-তমোনাশা বামা কে (মোহিনী)।\nঘোর ঘটা করিঘটা ব্রহ্মকটা ঠেকেছে।।\nরাপসী শিরসি শশী, হারোরসি এলোকেশী,\nমধ্যস্থলা সুধাচালা কুলবালা নাচিছে।।"
-      },
-      {
-        id: "song-2",
-        title: "মা আছেন আর আমি আছি",
-        raag: "লগ্নী-খাম্বাজ",
-        taal: "কাহারবা",
-        composer: "প্রচলিত",
-        summary: "মায়ের চিরন্তন আশ্রয়, অকৃত্রিম অপত্য স্নেহ এবং জীবনের সকল সংকট মোচনের গভীর আত্মনিবেদন।",
-        lyricsSample: "মা আছেন আর আমি আছি ভাবনা কি আছে আমার।\nমায়ের হাতে খাই পরি, মা নিয়েছেন আমার ভার।।\nসংসার পাকে ঘোর বিপাকে যখন দেখবি অন্ধকার।\nঅন্ধকারের বিপদ হ’তে মা যে করেছেন উদ্ধার।।"
-      },
-      {
-        id: "song-3",
-        title: "আমার মাকে কি দেখেছিস্ তোরা",
-        raag: "জংলা",
-        taal: "দাদরা",
-        composer: "প্রচলিত",
-        summary: "বিশ্ববাসীকে বিশ্বজননীর চিন্ময়ী হাসিমুখ ও প্রসারিত প্রেমবাহুর অমৃতরূপ দর্শনের আনন্দময় আহ্বান।",
-        lyricsSample: "আমার মাকে কি দেখেছিস্ তোরা বল্ সত্যি ক'রে।\nমায়ের নব নব নবরূপে ভুবন মন হরে।।\nমা তো আমার নয় রে কল্পনা ঐ দেখ্ চিন্ময়ী হাস্যবদনা,\nমায়ের স্নেহ-চক্ষে প্রেমবক্ষে অমিয় ঝরে।।"
-      },
-      {
-        id: "song-4",
-        title: "আমার মা ত্বং হি তারা",
-        raag: "ভৈরবী",
-        taal: "একতাল",
-        composer: "প্রচলিত",
-        summary: "তারামায়ের ত্রিগুণময়ী, পরাৎপরা এবং সর্বভূতে সাকার-নিরাকার ব্যাপ্তির পরম বৈদান্তিক স্তুতি।",
-        lyricsSample: "আমার মা ত্বং হি তারা, তুমি ত্রিগুণধরা পরাৎপরা।\nআমি জানি মা ও দীনদয়াময়ী, তুমি দুর্গমেতে দুখহরা।।\nতুমি জলে তুমি স্থলে, তুমি আদিমূলে গো মা,\nআছ সর্বঘটে অঙ্কুটে, সাকার আকার নিরাকারা।।"
-      },
-      {
-        id: "song-5",
-        title: "যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে",
-        raag: "কাংড়ালে",
-        taal: "ঝাঁপতাল",
-        composer: "কমলাকান্ত",
-        summary: "কামাদি রিপুদের ফাঁকি দিয়ে হৃদয়ের নিভৃতে পরম রত্নস্বরূপা শ্যামা মাকে পরম যত্নে আগলে রাখার সাধনাগীত।",
-        lyricsSample: "যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে।\nমন তুই দেখ্ আর আমি দেখি, আর যেন কেউ নাহি দেখে।।\nকামাদিরে দিয়ে ফাঁকি, আয় মন বিরলে দেখি\nরসনারে সঙ্গে রাখি, সে যেন মা ব'লে ডাকে।।"
-      }
-    ];
+  {
+    "id": "song-1",
+    "title": "(এমা) কালভয় বারিণী কপালিনী কালরূপিণী",
+    "raag": "দেশ",
+    "taal": "তেওরা",
+    "composer": "প্রচলিত",
+    "lyrics": "(এমা) কালভয় বারিণী কপালিনী কালরূপিণী\nশম্ভুভামিনী, নিশুম্ভঘাতিনী, সমরবাসিনী সুরবন্দিনী ।।\nপুর-হর-মনোমোহকারিণী, সত্যবাদিনী;\nতন্ত্রদায়িনী, ত্রাস-নাশিনী, ত্রাণকারিণী, তিমির-বরণী ।।\nত্রিগুণধারিণী, ত্রিদেবজননী, ত্রিলোকেশী, তেজরূপিণী,\nঅন্নদায়িনী, অমরপালিনী, অসুরদলনী, আদিকারিণী,\nআশুতোষ-হৃদিবিলাসিনী, আত্মরূপিণী ।।\n(এমা) O Mother!\nকালভয় The fear of death/time\nবারিণী The remover\nকপালিনী She who wears a skull garland\nকালরূপিণী She whose form is Time itself\nশম্ভুভামিনী The beloved consort of Shambhu (Shiva)\nনিশুম্ভঘাতিনী The slayer of the demon Nishumbha\nসমরবাসিনী She who dwells in battle\nসুরবন্দিনী She who is worshipped by the Gods\nপুর-হর \"Destroyer of cities\" (an epithet for Shiva)\nমনোমোহকারিণী She who enchants the mind (of Shiva)\nসত্যবাদিনী She who is the embodiment of Truth\nতন্ত্রদায়িনী The giver of the Tantras (divine knowledge)\nত্রাস-নাশিনী The destroyer of terror\nত্রাণকারিণী The saviour; she who grants refuge\nতিমির-বরণী She whose complexion is as dark as the night\nত্রিগুণধারিণী The bearer of the three Gunas\nত্রিদেবজননী The mother of the three great Gods\nত্রিলোকেশী The ruler of the three worlds\nতেজরূপিণী She whose form is pure energy and brilliance\nঅন্নদায়িনী The giver of food\nঅমরপালিনী The protector of the immortals (Gods)\nঅসুরদলনী The crusher of the demons\nআদিকারিণী The primal cause; the original creator\nআশুতোষ \"He who is easily pleased\" (an epithet for Shiva)\nহৃদিবিলাসিনী She who joyfully dwells in the heart (of Shiva)\nআত্মরূপিণী She whose form is the ultimate Self (Atman)"
+  },
+  {
+    "id": "song-2",
+    "title": "অন্তরে জাগিছ গো মা",
+    "raag": "সুরট",
+    "taal": "মল্লার—ঝাঁপতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "অন্তরে জাগিছ গো মা, অন্তরযামিনী,\nকোলে করে আছ মোরে, দিবস-যামিনী ।।\nঅধম সুতের প্রতি কেন এত স্নেহপ্রীতি,\nপ্রেমে আহা একেবারে যেন পাগলিনী ।।\nকখনো আদর করি, কখনো সবলে ধরি,\nপিয়াও অমৃত শুনাও মধুর কাহিনী;\nনিরবধি অবিচারে, কত ভালোবাস মোরে,\nউদ্ধারিছ বারে বারে পতিতোদ্ধারিনি ।।\nবুঝেছি এবার সার, মা আমার আমি মার,\nচলিব সুপথে সদা শুনি তব বাণী;\nকরি মাতৃস্তন্য পান, হব বীর বলবান,\nআনন্দে গাইব তব ব্রহ্মসনাতনী ।।\n[https://youtu.be/SrjJGOlowI4?si=1zypEkjZpfiZtVei](https://youtu.be/SrjJGOlowI4?si=1zypEkjZpfiZtVei)"
+  },
+  {
+    "id": "song-3",
+    "title": "অভয়-পদে প্রাণ সঁপেছি",
+    "raag": "গৌড়সারঙ্গ",
+    "taal": "ঝাঁপতাল",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "অভয়-পদে প্রাণ সঁপেছি ।\nআমি আর কি যমের ভয় রেখেছি ।।\nকালী নাম কল্পতরু, হৃদয়ে রোপণ করেছি ।\nএ দেহ বেচে ভবের হাটে দুর্গানাম কিনে এনেছি ।।\nদেহের মধ্যে সুজন যে জন তাঁর ঘরেতে ঘর করেছি ।\nএবার শমন এলে হৃদয় খুলে দেখাব ভেবে রেখেছি ।।\nসারাৎসার তারা নাম আপন শিখাগ্রে রেখেছি ।\nরামপ্রসাদ বলে দুর্গা ব’লে, যাত্রা করে বসে আছি ।।"
+  },
+  {
+    "id": "song-4",
+    "title": "অভয়ার অভয়পদ কর মন সার",
+    "raag": "গৌড়সারঙ্গ",
+    "taal": "ঝাঁপতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "অভয়ার অভয়পদ কর মন সার,\nভবভয় সব দূরে যাবে রে তোমার ।।\nঅকর্মজনিত ভয় যদি ভোগাধীন হয়,\nভয়হরা তারা নামে পাইবে নিস্তার ।।\nভ্রান্তিযুক্ত শ্রান্তিহীন, হেলায় হারালে দিন,\nএখনো কর বিধান মনরে আমার;\nআদিভূতা সনাতনী চরণ কররে ধ্যান,\nনা হইও অকিঞ্চন আকিঞ্চনে বদ্ধ আর ।।"
+  },
+  {
+    "id": "song-5",
+    "title": "আমরা মায়ের ছেলে, আমরা মায়ের ছেলে",
+    "raag": "ইমন",
+    "taal": "কল্যাণ—খেমটা",
+    "composer": "প্রচলিত",
+    "lyrics": "আমরা মায়ের ছেলে, আমরা মায়ের ছেলে।\nআমরা কি কম, আসুক না যম, জিনব অবহেলে ।।\nপথের’পরে বিপদ এলে, দলতে পারি পদতলে।\n(মোদের) হুঙ্কারেতে সাগর শুকায়, পাহাড় পড়ে ট’লে ।।\nচন্দ্র সূর্য গ্রহতারা, মায়ের কথায় ঘুরছে তারা।\nএমন মায়ের ছেলে মোরা দুর্বল কে বলে ।।\nমোদের আবার পাপ কোথায়, স্বর্গ নরক কে বল চায়?\nকাজ ফুরালে সন্ধ্যাবেলায় মা করিবে কোলে ।।"
+  },
+  {
+    "id": "song-6",
+    "title": "আমার মা ত্বং হি তারা",
+    "raag": "ভৈরবী",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "আমার মা ত্বং হি তারা, তুমি ত্রিগুণধরা পরাৎপরা ।\nআমি জানি মা ও দীনদয়াময়ী, তুমি দুর্গমেতে দুখহরা ।।\nতুমি জলে তুমি স্থলে, তুমি আদিমূলে গো মা,\nআছ সর্বঘটে অক্ষপুটে, সাকার আকার নিরাকারা ।।\nতুমি সন্ধ্যা তুমি গায়ত্রী, তুমি জগদ্ধাত্রী গো মা,\nতুমি অকূলের ত্রাণকর্ত্রী, সদা শিবের মনোহরা ।।"
+  },
+  {
+    "id": "song-7",
+    "title": "আমার মাকে কি দেখেছিস্ তোরা",
+    "raag": "জংলা",
+    "taal": "দাদরা",
+    "composer": "প্রচলিত",
+    "lyrics": "আমার মাকে কি দেখেছিস্ তোরা বল্ সত্যি ক'রে ।\nমায়ের নব নব নবরূপে ভুবন মন হরে ।।\nমা তো আমার নয় রে কল্পনা ঐ দেখ্ চিন্ময়ী হাস্যবদনা,\nমায়ের স্নেহ-চক্ষে প্রেমবক্ষে অমিয় ঝরে ।।\nহাসিমুখে করে ভুবন আলো, মায়ের কোলে শোভে ভক্তদল,\nমায়ের প্রসারিত প্রেমবাহু আমাদের তরে ।।\nআয় রে আয় ও জগৎবাসী, তোরা দেখে যা একবার আসি,\nমোদের জননীর ও রূপরাশি পরাণ ভরে ।\n(ও রূপ) যে দেখেছে সেই মজেছে জনমের তরে ।।"
+  },
+  {
+    "id": "song-8",
+    "title": "আর কিছু নাই সংসারের মাঝে",
+    "raag": "ছায়ানট",
+    "taal": "কাওয়ালী",
+    "composer": "কমলাকান্ত",
+    "lyrics": "আর কিছু নাই সংসারের মাঝে, কেবল শ্যামা সার রে ।\nধ্যান কালী জ্ঞান কালী প্রাণ কালী আমার রে ।।\nআসিয়ে ভুবনে এ তনু ধারণে যাতনা না হয় কার রে ।\n(একবার) হেরিলে ও কায়, সব দুঃখ যায়, এই গুণ শ্যামা মার রে ।।\nএ ভবে এসেছে, কেহ সুখে আছে, পেয়ে শিরে রাজ্যভার ।\n(আমার) দরিদ্রের ধন, ও রাঙা চরণ, গলায় করেছি হার রে ।।\nকমলাকান্ত, হয়ে ভ্রান্ত, যাওয়া আসা বারবার রে ।\n(মায়ের) অভয় চরণ, লহরে শরণ, অনায়াসে পাবি পার রে ।।"
+  },
+  {
+    "id": "song-9",
+    "title": "আশাবাসা ঘোর-তমোনাশা বামা কে",
+    "raag": "বেহাগ",
+    "taal": "কাওয়ালী",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "আশাবাসা ঘোর-তমোনাশা বামা কে (মোহিনী)।\nঘোর ঘটা কান্তিছটা ব্রহ্মকটা ঠেকেছে ।।\nরূপসী শিরসি শশী, হারোরসি এলোকেশী,\nমধ্যস্থলা সুধাঢালা কুলবালা নাচিছে ।।\nদ্রুত চলে আস্য টলে, বাহুবলে দৈত্যদলে;\nডাকে শিবা কব কিবা নিশি দিবা ক’রেছে ।।\nক্ষীণ-দীন ভাগ্যহীন দুষ্টচিত্ত সুকঠিন;\nরামপ্রসাদে কালীর বাদে কি প্রমাদে ঠেকেছে ।।"
+  },
+  {
+    "id": "song-10",
+    "title": "আহা মরি মরি রে, কিরূপ মাধুরী",
+    "raag": "জয়জয়ন্তী",
+    "taal": "ধামার",
+    "composer": "প্রচলিত",
+    "lyrics": "আহা মরি মরি রে, কিরূপ মাধুরী, ও বামা কে আসে\nহাসিতে হাসিতে ঘনবরণী ।\nবিবসনা নবীনা রমণী এলায়ে পড়েছে বেণী\nচরণে নূপুর, কটিতে কিঙ্কিণি, আসব-আবেশে লোহিত-লোচনী ।।\n(বামার) ভালে শিশুশশী, সীমন্তে সিন্দূর, পীযূষপূর্ণ পীন পয়োধর,\nঅসিমুণ্ডধরা বরাভয়া মুন্ডমালিনী;\nসাধক হৃদয় ভাবেতে ধন্য, নিরূপমা নারী নহে সামান্য,\nত্রিতাপহারিণী শিবের কামিনী বিশ্বপ্রসবিনী ভুবনমোহিনী।।"
+  },
+  {
+    "id": "song-11",
+    "title": "একবার বিরাজ গো মা হৃদি কমলাসনে",
+    "raag": "কীর্ত্তন",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "একবার বিরাজ গো মা হৃদি কমলাসনে\nতোমার ভুবন ভরা রূপটি একবার দেখে লই মা নয়নে ।।\nতুমি অন্নপূর্ণা মা, শ্মশানে শ্যামা, কৈলাসেতে উমা, তুমি বৈকুণ্ঠে রমা\nধর বিরিঞ্চি শিব বিষ্ণু রূপ সৃজন-লয়-পালনে ।।\nতুমি পুরুষ কি নারী, বুঝিতে নারি  ! স্বয়ং না বুঝালে তা কি বুঝিতে পারি,\nতুমি আধা রাধা আধা কৃষ্ণ সাজিলে বৃন্দাবনে ।।\nতুমি জগতের মাতা, যোগী-জনানুগতা, অনুগত জনে কৃপা কল্পলতা,\nতোমায় মা বলে ডাকিলে নাকি কোলে নাও ভক্তজনে ।।\nদুঃখদৈন্যহারিণী চৈতন্যকারিণী, অন্য কিছু চাহি না বিনা চরণ দুখানি,\nআমি প্রেম সরোজে সাজাব পদ বাসনা মনে মনে ।।\nপরিব্রাজক ভিখারী সাধ মনেতে ভারী, মধুহাসিমাখা মার মুখখানি হেরি\nবসে মায়ের কোলে মা মা বলে মাতিব যোগধ্যানে ।।"
+  },
+  {
+    "id": "song-12",
+    "title": "ওঁ সর্বমঙ্গলমঙ্গল্যে, শিবে, সর্বার্থসাধিকে",
+    "raag": "অনির্দিষ্ট",
+    "taal": "অনির্দিষ্ট",
+    "composer": "প্রচলিত",
+    "lyrics": "ওঁ সর্বমঙ্গলমঙ্গল্যে, শিবে, সর্বার্থসাধিকে ।\nশরণ্যে, ত্র্যম্বকে, গৌরি, নারায়ণি নমোহস্তু তে ।।\nসৃষ্টস্থিতিবিনাশানাং শক্তিভূতে সনাতনি ।\nগুণাশ্রয়ে, গুণময়ে, নারায়ণি নমোহস্তু তে ।।\nশরণাগত-দীনার্ত-পরিত্রাণ পরায়ণে ।\nসর্বস্যার্তিহরে দেবি নারায়ণি নমোহস্তু তে ।।\nজয় নারায়ণি নমোহস্তু তে, জয় নারায়ণি নমোহস্তু তে ।\nজয় নারায়ণি নমোহস্তু তে, জয় নারায়ণি নমোহস্তু তে ।।"
+  },
+  {
+    "id": "song-13",
+    "title": "ওমা ভবভয়বারিণী",
+    "raag": "ইমন",
+    "taal": "কল্যাণ—চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "ওমা ভবভয়বারিণী, এলাম ভবে দেখা দে গো জননী,\nদিও না যাতনা ত্রিনয়না, দিবানিশি ভাসি দুঃখে গো তারিণী ।।\nতব পদে এই মিনতি, না জানি জননী তোমার স্তুতি,\nগতিহীনের অতি মূঢ়মতি, কর দীনে ত্রাণ, ত্রাণকারিণি ।।\nদাসের দোষ হর হর-মনোরমা, তনয়েরে ঘৃণা ক’র না গো উমা,\nএ পাপাঙ্গে গো অপাঙ্গে, কর কৃপা শ্যামাঙ্গিনী,\nএ রঙ্গভূমির রঙ্গ, কালস্রোতে হ’লে ভঙ্গ,\nপ্রেমিকের না হয় আতঙ্ক, কর কৃপা কপালিনী ।।"
+  },
+  {
+    "id": "song-14",
+    "title": "কখনো কি রঙ্গে থাক মা",
+    "raag": "ছায়া",
+    "taal": "খাম্বাজ—একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "কখনো কি রঙ্গে থাক মা, শ্যামা সুধাতরঙ্গিনি।\nতুমি রঙ্গে ভঙ্গে অপাঙ্গে অনঙ্গে ভঙ্গ দাও জননী।।\nলম্ফে ঝম্ফে কম্পে ধরা, অসিধরা করালিনী ।\n(তুমি) ত্রিগুণা ত্রিপুরা তারা ভয়ঙ্করা কালকামিনী।।\nসাধকের বাঞ্ছা পূর্ণ কর নানা-রূপ ধারিণী।\n(কভু) কমলের কমলে নাচ মা পূর্ণব্রহ্ম-সনাতনী।।"
+  },
+  {
+    "id": "song-15",
+    "title": "কত চাঁদ শ্রীপদ-নখ-ফাঁদে সুধা আসে",
+    "raag": "সাহানা",
+    "taal": "কাওয়ালী",
+    "composer": "প্রচলিত",
+    "lyrics": "কত চাঁদ শ্রীপদ-নখ-ফাঁদে সুধা আসে,\nঅরুণ কিরণে নব-নীল-নলিনী হাসে ।।\nউলঙ্গ রক্তাক্ত কায়, এলোকেশী ভীমা ধায়,\nবিধি-হরি-হর কাঁপে ত্রাসে;\nহাসি ভাষে স্নেহ ভরে বামা বরাভয় করে,\nতনয় হৃদয় সুখে ভাসে ।।\nঘোর শ্বশান ভিতরে শিবা ঘোর রব করে,\nসুখে মহাকাল সহবাসে;\nবসি শব-শিব বুকে, সুপ্রসন্ন হাসি মুখে,\nবিপরীত-রতি রসোল্লাসে ।।\nরবি শশী এক ঠাঁই, হেন কভু শুনি নাই,\nকঠোরে কোমলে একাবাসে;\nঅদ্ভুত মরি মরি, এ তত্ত্ব বুঝিতে নারি,\nভয়ঙ্করী তবু ভয় নাশে ।।"
+  },
+  {
+    "id": "song-16",
+    "title": "কলুষ নাশিনী তারা",
+    "raag": "আড়ানা",
+    "taal": "তিনতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "কলুষ নাশিনী তারা ।\nজগত জননী পতিত পাবনী\nজগজন মনোহরা ।।\nসৃজন-পালন-নিধন কারিণী\nজ্ঞান প্রেম ভক্তি দায়িনী,\nশরণাগত তারিণী জননী\nবরদা অভয় করা ।।"
+  },
+  {
+    "id": "song-17",
+    "title": "কালী কপালিনী পূর্ণ সনাতনী",
+    "raag": "কানাড়া",
+    "taal": "চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "---\nকালী কপালিনী পূর্ণ সনাতনী\nকলুষনাশিনী কৈবল্যদায়িনী\nজ্ঞান ভক্তি প্রদায়িনী, পতিত জন পাবনী ।।\nকাতরে ডাকে মা অকৃতি সন্তান,\nকৃপা করি তারে দাও পদে স্থান\nদাও সেই জ্ঞান, যাহে পায় ত্রাণ\nএ ভব সাগরে জগত জননী ।।\nযেজন তোমার ও রাঙা চরণ,\nহৃদয়ে সতত করে মা স্মরণ,\nভব ভয় তার হয় নিবারণ,\nঅন্তে শান্তিধামে যায় সে তখনি ।।\nতুমি বিনা আর কে আছে আমার,\nমাগি গো শরণ শ্রীপদে তোমার,\nকরো না নিরাশ হও মা প্রকাশ,\nদাও দরশন করুণারূপিণী ।।"
+  },
+  {
+    "id": "song-18",
+    "title": "কালী কালী বল রসনা",
+    "raag": "বসন্ত",
+    "taal": "বাহার—একতাল",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "কালী কালী বল রসনা ।\nকর পদধ্যান, নামামৃত পান,\nযদি হতে ত্রাণ থাকে বাসনা ।।\nভাই বন্ধু সুত, দারা পরিজন,\nসঙ্গের দোসর নহে কোন জন ।\nদুরন্ত শমন, বাঁধিবে যখন,\nবিনে ঐ চরণ, কেহ কার না ।।\nদুর্গা নাম মুখে বল একবার,\nসঙ্গের সম্বল দুর্গা নাম আমার ।\nঅনিত্য সংসার নাহি পারাপার\nসকলি অসার, ভেবে দেখ না ।।\nগেল গেল কাল, বিফলে গেল,\nদেখ না কালান্ত নিকটে এল।\nপ্রসাদ বলে ভাল, কালী কালী বল,\nদূর হবে সব যম-যন্ত্রণা।।"
+  },
+  {
+    "id": "song-19",
+    "title": "কে এল এলোকেশে ন্যাংটা বেশে রণেতে",
+    "raag": "মিশ্র",
+    "taal": "বাহার—চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "কে এল এলোকেশে ন্যাংটা বেশে রণেতে,\nনাচে শবে, নাশে সবে, শিবা সব সঙ্গেতে ।।\nঅধরে রুধিরধারা, সর্বাঙ্গ শোণিতে ভরা,\nশাণিত কৃপাণধরা, কাঁপে ধরা ভয়েতে ।।\nশব দোলে কর্ণমূলে, নরশির শোভে গলে,\nঅনল জ্বলিছে ভালে, কালফণী কাঁধেতে;\nপ্রেমিক বলে ওমা কালী ভূভার হরিলি খালি,\nকরলিনে ভার আমার খালি, পারিনা ভার বহিতে ।।"
+  },
+  {
+    "id": "song-20",
+    "title": "কে গো আমার মা কি এলি।",
+    "raag": "প্রসাদী",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "কে গো আমার মা কি এলি।\nআর মা মনের কথা বলি (ওমা শোন মা, দু’টো কথা)।।\nএত দুঃখ দিয়ে শ্যামা যদি দয়া প্রকাশিলি,\nতবে মা হ’য়ে মা মায়ের মত ছেলের কথা শোন মা কালী।।\nদাঁড়া গো মা হৃৎকমলে, পূজি মানস কুসুম তুলি,\nভক্তি চন্দন মাখাইয়ে পদে দিব পুষ্পাঞ্জলি।।\nকরিব সুমহৎ হোম চিৎকুণ্ডে অনল জ্বালি\nপূর্ণাহুতি দিব তাহে ‘জয় কালী, জয় কালী’ বলি।।\nপ্রাণান্ত এ দক্ষিণান্ত কর্মফল মা তুই সকলি,\nমায়ের ছেলে প্রেমিক এখন, যার কাছে কাল কৃতাঞ্জলি।।"
+  },
+  {
+    "id": "song-21",
+    "title": "ক্ষেপার হাটবাজার",
+    "raag": "প্রসাদী",
+    "taal": "একতাল",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "ক্ষেপার হাটবাজার, মা তোদের ক্ষেপার হাটবাজার।\n(গুণের কথা কব কার, মা)\nতোরা দুই সতীনে কেউ বুকে কেউ মাথায় চড়িস্ তাঁর ।।\nকর্তা যিনি ক্ষেপা তিনি ক্ষেপার মূলাধার।\n(আবার) চাকলা ছাড়া চেলা দুটো সঙ্গে অনিবার ।।\nগজ বিনে গো-আরোহণে ফিরিস্ কদাচার;\nমণিমুক্তা ফেলে পরিস্ গলে নরশির হার ।।\nশ্মশানে মশানে ফিরিস্ কার বা ধারিস্ ধার।\nএবার রামপ্রসাদকে ভবঘোরে করতে হবে পার ।।"
+  },
+  {
+    "id": "song-22",
+    "title": "গয়া গঙ্গা প্রভাসাদি",
+    "raag": "অনির্দিষ্ট",
+    "taal": "অনির্দিষ্ট",
+    "composer": "প্রচলিত",
+    "lyrics": "গয়া গঙ্গা প্রভাসাদি কাশী কাঞ্চী কেবা চায়,\nকালী কালী কালী বলে অজপা যদি ফুরায় ॥\nত্রিসন্ধ্যা যে বলে কালী পূজা সন্ধ্যা সেকি চায়,\nসন্ধ্যা তার সন্ধানে ফেরে কভু সন্ধি নাহি পায় ॥\nজপ যজ্ঞ পূজা হোম আর কিছু নাহি মনে লয়;\nমদনের যাগ যজ্ঞ ব্রহ্মময়ীর রাঙ্গা পায়।\nকালী নামের এত গুণ কেবা জানতে পারে তায়,\nদেবাদিদেব মহাদেব যার পঞ্চমুখে গুণ গায় ॥\nThe central theme of the song is the Supreme Efficacy of the Kāli Name (Nāma Mahimā), arguing that devotion to the Mother through chanting her name is superior to all rituals, pilgrimages, and spiritual practices.\nAjapā Japa (or Ajapā Gāyatrī) is the spontaneous, involuntary breath-sound of Soham (So on inhale, Ham on exhale)."
+  },
+  {
+    "id": "song-23",
+    "title": "জগত জননী আসিয়াছে আজি",
+    "raag": "খাম্বাজ",
+    "taal": "তালফেরতা চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "জগত জননী আসিয়াছে আজি জয় মা তারিণী গাও রে,\nবাজাও ডঙ্কা নাহিক শঙ্কা ঘুচে গেছে ভবভয় রে ।।\nনেহারি দানব-নিপীড়িত ধরা, দানব-দলনী পাগলের পারা,\nমুখে অট্টহাস ত্রিভুবন-ত্রাস বুঝিবা সৃষ্টি যায় রে ।।\nডাকিনী যোগিনী নাচিছে সঙ্গে, গ্রাসিছে দানব কত না রঙ্গে,\nরুধির লেগেছে সকল অঙ্গে পদভরে ধরা টলে রে ।\nদানব নাশিতে অসিমুন্ডধরা, ভকতের তরে বরাভয়করা,\nরুদ্র মধুরে অপরূপ তারা, হেরিলে প্রাণ জুড়ায় রে ।।"
+  },
+  {
+    "id": "song-24",
+    "title": "জগতজননী, আমায় তারাও গো মা তারা",
+    "raag": "আড়ানা",
+    "taal": "চৌতাল",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "জগতজননী, আমায় তারাও গো মা তারা।\nজগতকে তরালে আমাকে ডুবালে আমি কি জগত ছাড়া, মা তারা।।\nদিবা অবসান রাত্রিকালে, দিয়েছি সাঁতার শ্রীদুর্গা বলে,\nমম জীর্ণ তরী মা আছ কাণ্ডারী, (তবু) ডুবিল ডুবিল ডুবিল ভরা।।\nরামপ্রসাদ ভাবিয়ে সারা, মা হ’য়ে পাঠালি মাসীর পড়া,\nকোথায় গিয়েছিলি এ ধর্ম শিখিলি, মা হয়ে সন্তান ছাড়া গো তারা?"
+  },
+  {
+    "id": "song-25",
+    "title": "জয় জয় জগজননী দেবী",
+    "raag": "সিন্ধু খাম্বাজ",
+    "taal": "কাহারবা",
+    "composer": "প্রচলিত",
+    "lyrics": "জয় জয় জগজননী দেবী, সুর-নর-মুনি-অসুর সেবী\nভক্ত-ভূতি-দায়িনী ভয়হরণী কলিকা ।\nমঙ্গল-মুদ-সিদ্ধি-সদনী, পর্ব-শর্বরীশ-বদনী,\nতাপ-তিমির তরুণ-তরণী কিরণ মালিকা ।।\nবর্মচর্ম কর-কৃপাণ, শূল-শৈল ধনুষ-বাণ\nধরণী-দলনী দানব-দল-রণ-করালিকা ।\nপূতনা পিশাচ প্রেত, ডাকিনী শাকিনী সমেত,\nভূত গ্রহ বেতাল খগ মৃগালি জালিকা ।।\nজয় মহেশ ভামিনী, অনেক রূপ নামিনী,\nসমস্ত লোক স্বামিনী হিম-শৈল-বালিকা ।\nরঘুপতি-পদ-পরম-প্রেম, তুলসী চাহে অচল নেম,\nদেহ হয়ো প্রসন্ন পাহি প্রণতপালিকা ।।"
+  },
+  {
+    "id": "song-26",
+    "title": "জাগো, জাগো দয়াময়ী জননী",
+    "raag": "ইমন",
+    "taal": "মিশ্র—কাওয়ালী",
+    "composer": "প্রচলিত",
+    "lyrics": "জাগো, জাগো দয়াময়ী জননী,\nতব মন্দির দ্বারে আজি, মিলিত তব সন্তানগণ ।।\nদেশ দেশান্তর করি অনুসন্ধান কুসুম চন্দন,\nআজি এনেছি জননী পূজিতে তব চরণ ।।\nতব মঙ্গল মন্ত্রে তোমারি সন্তান, বিস্মৃত-গর্ব-ভেদ-অভিমান\nনব আশায় পুলকিত প্রাণ,\nদেহ শিক্ষা নব দীক্ষা, জননী, মেলি করুণা নয়ন ।।\nকরে আশীষ তুলি পুণ্য পাণি, শুনাও সন্তানে অভয়বাণী;\nশত বিষাদ দৈন্য সরম মানি পড়ুক সরিয়া;\n(আজি) দিকে দিকে তব বিজয় শঙ্খ উঠুক বাজিয়া বাজিয়া,\nপুলক-উৎসবে হোক পরিপূরিত মম দীন ভবন ।।"
+  },
+  {
+    "id": "song-27",
+    "title": "ঢলিয়ে ঢলিয়ে কে আসে",
+    "raag": "বাগেশ্রী",
+    "taal": "ধামার",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "ঢলিয়ে ঢলিয়ে কে আসে, গলিত-চিকুর আসব-আবেশে\nবামা রণে দ্রুতগতি চলে, দলে দানবদলে, ধরে করতলে গজ গরাসে,\nকালীর শরীরে রুধির শোভিছে, কালিন্দীর জলে কিংশুক ভাসে\nনীলকমল শ্রীমুখমণ্ডল, অর্দ্ধচন্দ্র ভালে প্রকাশে ।।\nনীলকান্ত মণি নিতান্ত, নখরনিকর তিমিির নাশে,\nরূপের ছটায় তড়িত ঘটায়, ঘন ঘোর রব উঠে আকাশে;\nদিতিসুতচয়, সবার হৃদয়, থর থর থর কাঁপে হুতাশে,\nকোপ কর দূর, চল নিজপুর, নিবেদে শ্রীরামপ্রসাদ দাসে।।"
+  },
+  {
+    "id": "song-28",
+    "title": "ত্বং অপারা, বিশ্বসারা",
+    "raag": "জয়জয়ন্তী",
+    "taal": "চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "ত্বং অপারা, বিশ্বসারা, বিশ্বধারা বিশ্বরঞ্জিনী;\nসর্বভূত-আত্মভূত, সর্বাবিভূতি-প্রবিধায়িনী ।।\nত্বং অনল-ক্ষিতি-অনিল, ব্যোম-সলিল-সংরূপিণী;\nতুমি অমেয়া মহেশজায়া, ভো অভয়া ভয়বারিণী ।।\nবিরাজিতা শব-আসনে, কভু প্রমত্তা আসব পানে,\nকভু যুক্তা শিব সনে, শিবে গো শিবাপি;\nওমা ত্রিগুণধারিণি, গুণাতীতা ত্রিনয়নি,\nপ্রেমিকের ত্রিতাপের তাপ সংহর হর-মোহিনী।।\nWord meaning\nত্বং অপারা : \"You are limitless/infinite.\" She is beyond all boundaries of time, space, and comprehension.\nবিশ্বসারা : \"You are the essence of the universe.\"\nবিশ্বধারা : \"You are the sustainer of the universe.\"\nবিশ্বরঞ্জিনী : \"You are the one who colors/delights the universe.\"\nসর্বভূত-আত্মভূত : \"You are the soul (Atman) within all beings.\"\nসর্বাবিভূতি-প্রবিধায়িনী : \"You are the giver of all divine powers and manifestations.\"\nঅনল-ক্ষিতি-অনিল, ব্যোম-সলিল-সংরূপিণী : She is the embodiment of the Pancha Mahabhuta, the five great elements that constitute all physical creation.\nঅমেয়া: \"You are immeasurable.\"\nমহেশজায়া: \"The consort of Mahesha (Shiva).\" This identifies her as Shakti, the dynamic feminine energy, united with Shiva, the static pure consciousness.\nঅভয়া ভয়বারিণী: \"The fearless one and the remover of fear.\"\nবিরাজিতা শব-আসনে : \"Seated upon a corpse.\" This is the iconic image of Goddess Kali. The śaba (corpse) is Shiva, representing pure, inert consciousness. She, as active energy (Shakti), is the power that animates the universe. It signifies that she is the supreme power, transcendent even over death.\nপ্রমত্তা আসব পানে (Pramattā āsaba pānē): \"Ecstatic from drinking wine (āsaba).\" This is symbolic. The \"wine\" is the intoxicating bliss of divine consciousness. It represents her wild, untamed nature that breaks free from all worldly conventions.\nত্রিগুণধারিণি, গুণাতীতা (Triguṇadhāriṇī, Guṇātītā): \"The bearer of the three Gunas, yet beyond the Gunas.\" This is a core philosophical concept. She manifests and manages the entire creation through the three modes of nature (Sattva - purity, Rajas - action, Tamas - inertia), yet her true self is transcendent and untouched by them.\nপ্রেমিকের ত্রিতাপের তাপ সংহর (Prēmikēra tritāpēra tāpa saṁhara): This is the devotee's prayer. The tritāpa are the three great miseries of existence:\nĀdhyātmika: Sufferings arising from one's own body and mind (illness, anxiety).\nĀdhibhautika: Sufferings caused by other beings (enemies, wild animals).\nĀdhidaivika: Sufferings from supernatural or natural forces (floods, famines, fate).The devotee (prēmik, literally \"the lover\") asks her to destroy this burning pain.\nহর-মোহিনী (Hara-mōhinī): \"She who enchants/captivates Hara (Shiva).\" This is the ultimate statement of her power. She is the supreme enchantress whose divine play and charm captivate even the ultimate ascetic, Lord Shiva. The devotee appeals to this power, believing that if she can enchant the Lord of the Universe, she can surely relieve the suffering of a humble devotee."
+  },
+  {
+    "id": "song-29",
+    "title": "দনুজদলনী, নিজজন-প্রতিপালিনী শ্রীকালী",
+    "raag": "খাম্বাজ",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "দনুজদলনী, নিজজন-প্রতিপালিনী শ্রীকালী ।\nচণ্ড মুণ্ড খণ্ড খণ্ডি, মহিষাসুর ছিন্দি ভিন্দি,,\nশুন্ত নিশুম্ভ সভট সমরে নিমেষে মহাকালী ।।\nধ্যাওত তুয়া পাওত, ইন্দ্রাদিক-সুর অষ্টসিদ্ধি,\nঅর্থাদিক চতুর্বর্গ তুয়া কৃপা মৃড়ানী;\nমাঙ্গে তুঁঝে অচলা ভক্তি, দীজে নিজ দাস জানি,\nসদা ভক্তবৎসল হো মাতঃ তুঁ কৃপালী ।।"
+  },
+  {
+    "id": "song-30",
+    "title": "দয়াময়ী হয়ে গো মা নিদয়া হ’য়ো না শ্যামা",
+    "raag": "পরজ বাহার",
+    "taal": "সুরফাঁকতা",
+    "composer": "প্রচলিত",
+    "lyrics": "দয়াময়ী হয়ে গো মা নিদয়া হ’য়ো না শ্যামা।\nও হর-ললনা, বুঝিতে পারি না, এ কেমন তোমার ছলনা ।।\nভেবেছিলাম ভবে ভবজায়া ভেবে করব ভবব্যাধি শান্তনা,\nআমার, আশা সকল করিলে বিফল সফল ভ্রমণ হল না ।।\nপ্রপঞ্চ জগতে পরিজন ভূতে লঙ্ঘাইয়া দিছে যাতনা,\nথেতে শুতে যেতে ফেরাস তাদের মতে\nস্বাধীনতা প্রেমিক পেলে না;\nএত যে চাতুরী করিবি শঙ্করী, স্বপনেও তা ত জানি না,\n(এখন) কর মা উপায় দিয়ে স্থান ও পায় বৃথা জনম যেন যায় না ।।\nWord meaning\nপ্রপঞ্চ - The phenomenal world; the manifested universe, often seen as an illusion or Maya.\nপরিজন - Family members, kinsmen, relatives.\nলঙ্ঘাইয়া দিছে - Has given; has inflicted; has made one endure."
+  },
+  {
+    "id": "song-31",
+    "title": "দুরিতবারিণি ওমা হররাণি ডাকিছে কাতরে",
+    "raag": "অনির্দিষ্ট",
+    "taal": "অনির্দিষ্ট",
+    "composer": "প্রচলিত",
+    "lyrics": "(চৌতাল, সঞ্চারী-ধামার)\nদুরিতবারিণি ওমা হররাণি ডাকিছে কাতরে এ দীন সন্তান\nকরিয়া যতন কমল আসন পেতেছি হৃদয়ে কর অধিষ্ঠান ।।\nশিখাইয়া দাও তুমি মা ভবানি কেমনে পূজিব চরণ দু’খানি,\nভজন পূজন কিছুই না জানি, তাই ভাবি কিসে পাব পদে স্থান ।।\nভরসা কেবল করুণা তোমার তাই এ সন্তান ডাকে বারেবার,\nনাশ মা তাহার অজ্ঞান আঁধার তনয়ে তোমার দাও দিব্যজ্ঞান ।।\nযেন নাহি ভুলি চরণ দু’খানি এই মতি দাও তনয়ে জননী,\nঅকূল পাথার কিসে হই পার, ভব দুঃখ যেন হয় অবসান ।।\nদুরিতবারিণি - O remover of sins and hardships!\nহররাণি - O Queen of Hara (Shiva)!"
+  },
+  {
+    "id": "song-32",
+    "title": "দুর্গে দলনী দুঃখ, দারিদ্র্যদহনী",
+    "raag": "আড়ানা",
+    "taal": "ঝাঁপতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "দুর্গে দলনী দুঃখ, দারিদ্র্যদহনী, দুষ্ট-বিদারিণী হর-শম্ভু-জায়া ।।\nঅসুর-সংহারিণী, রক্তবীজ-নাশিনী, দীন-অভয়বরা-সুর-নর-পায়া ।।\nসংসার-তারিণী, তারা তরণীতে, উদ্ধরে কৃপালী, যো পরমা মায়া;\nসপ্তদ্বীপ নব খণ্ড ত্রৈলোক্য-ব্যাপিত যাচে সুযশ চারু আনন্দ-দায়া।।"
+  },
+  {
+    "id": "song-33",
+    "title": "দেহি পদতরনী, জননী",
+    "raag": "কাফি",
+    "taal": "সিন্ধু—ত্রিতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "দেহি পদতরনী, জননী।\nদিন দিন যায় দিন, আসে মাগো সেই দিন\nদিনে রেতে তাই তোরে ডাকি দীনতারিণী ।।\nজানি না কি বলে আমি ডাকিব গো মা তোমায়\nশিখায়েছ মা বলিতে মা বলিয়ে ডাকি তাই—\nকুপুত্র যদিও হয়, কুমাতা কখনও নয়\nচরণে শরণ তাই লয়েছি নিস্তারিণি ।।\nসংসার-প্রান্তরে শ্মশান-বাসিনী বলে,\nএ দীন পথিক বসে বিষয়-পাদপ মূলে,\nআসে ঐ কাল-ফণী, দংশিতে মোরে জননী\nত্রাসিত পরাণে তাই ডাকি মা ত্রিনয়নি ।।\nমায়া মায়াবিনী মোরে কুপপথে লয়ে যায়,\nদেখাও সুপথ মোরে সদা জ্বলি সে জ্বালায়;\nযায় যায় প্রাণ যায়, তাই ডাকি মা তোমায়,\nঅকূলে কর মা কোলে ওমা কলঙ্কদায়িনি।।"
+  },
+  {
+    "id": "song-34",
+    "title": "দ্যাখনা সমর আলো করে রে কার কামিনী",
+    "raag": "মল্লার",
+    "taal": "একতাল",
+    "composer": "কমলাকান্ত",
+    "lyrics": "দ্যাখনা সমর আলো করে রে কার কামিনী ।\nসজল জলদ জিনিয়া কায়, দশনে প্রকাশে দামিনী ।।\nএলায়ে চাঁচর-চিকুর-পাশ, সুরাসুর মাঝে না করে ত্রাস,\nঅট্টহাসে দানব নাশে, রণ প্রকাশে রঙ্গিনী ।।\nকিবা শোভা করে শ্রমজ-বিন্দু, ঘন তনু ঘেরি কুমুদবন্ধু\nঅমিয়সিন্ধু হেরিয়ে ইন্দু মলিন এ কোন মোহিনী ।।\nএকি অসম্ভব ভব-পরাভব, পদতলে শব-সদৃশ নীরব,\nকমলাকান্ত কর অনুভব, কে বটে এ গজগমিনী ।।"
+  },
+  {
+    "id": "song-35",
+    "title": "নব-সজল-জলধর-কায়",
+    "raag": "বারোয়াঁ",
+    "taal": "আড়খেমটা",
+    "composer": "কমলাকান্ত",
+    "lyrics": "---\nনব-সজল-জলধর-কায়\nশ্যামারূপ হেরিলে, কালীরূপ হেরিলে, প্রাণ গলে যায় ।।\nকপালে সিন্দুর, কটিতে ঘুঙ্গুর, রতন নূপুর পায় ( মায়ের );\nহাসিতে হাসিতে, দানব নাশিতে, রুধির লেগেছে গায় (মায়ের) ।।\nচরণ যুগল, অতি সুশীতল, প্রফুল্ল কমল প্রায় (আ-মরি);\nকমলাকান্তের, মন নিরন্তর, অমর হইতে চায় (ও পদে) ।।\nDictionary:"
+  },
+  {
+    "id": "song-36",
+    "title": "নমামি ত্বং তারিণী",
+    "raag": "মালকোষ",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "নমামি ত্বং তারিণী\nনমামি ত্বং তারিণী\nত্বং হি ব্রহ্মাণী, ত্বং হি রুদ্রাণী, মহেশ্বরী নারায়ণী\nবারাহী নারসিংহী অপরাজিতা কৌমারী\nঅষ্টশক্তি রূপিণী\nনমামি ত্বং তারিণী!\nবিকট শ্বশান করেছ আলয়,\nআসন করেছ ঈশান হৃদয়\nএলায়ে দিয়েছ চিকুর জাল\nলোল রসনা বিকট দশনা শোণিত মেখেছ অঙ্গে\nভীষণ আহবে ভীম হুঙ্কারে সেজেছ দানব দলনী ।\nনমামি ত্বং তারিণী,\nকরেতে শোভিত বরাভয় আর,\nশাণিত কৃপাণ নরশবশির\nকণ্ঠে দুলিছে মুণ্ডালী ।\nকটিতে বদ্ধ বিকট কাঞ্চী নরশবকর নিকরে\nগগন চুম্বিছে উজ্জল কিরীট চরণে বাজিছে কিঙ্কিণী\nনমামি ত্বং তারিণী\nতুমি ভূমি ব্যোম তুমিই সলিল\nতুমিই অনিল তুমি বৈশ্বানর\nতুমিই মনোবুদ্ধি ।।\nঅহঙ্কার তোমার বিকার চিদানন্দ রূপিণী\nতোমা ছাড়া কিছু নাহি আর\nবিপুল বিশ্বব্যাপিনী ।\nনমামি ত্বং তারিণী ।।"
+  },
+  {
+    "id": "song-37",
+    "title": "নীলবরণী, নবীনা রমণী",
+    "raag": "খাম্বাজ",
+    "taal": "চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "নীলবরণী, নবীনা রমণী, নাগিনীজড়িত জটাবিভূষিণী;\nনীল নলিনী জিনি ত্রিনয়নী, নিরখিলাম নিশানাথ-নিভাননী ।।\nনিরমল-নিশাকর-কপালিনী, নিরুপমা ভালে পঞ্চরেখাশ্রেণী,\nনৃকর চারুকর-সুশোভিনী, লোলরসনা করালবদনী ।।\nনৃত্যে বেষ্টিত শার্দূলছাল, নীলপদ্ম করে, করেকরবাল,\nনৃমুণ্ড-খর্পর অপর দ্বিকরে, লম্বোদরী লম্বোদর প্রসবিনী;\nনিপতিত পতি শবরূপে পায়, নিগমে ইহার নিগূঢ় না পায়;\nবিস্তার পাইতে শিবের উপায়, নিত্যসিদ্ধা তারা নগেন্দ্রনন্দিনী ।।"
+  },
+  {
+    "id": "song-38",
+    "title": "পঙ্কজ বনে রাত্রিদিনে",
+    "raag": "কামোদ",
+    "taal": "চৌতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "পঙ্কজ বনে রাত্রিদিনে, কি রঙ্গ করিছ শিবা,\nসদা শিবসঙ্গে আনন্দে, আনন্দময়ী ।।\nতুমি একা হ'য়েছ দ্বিধা, পরমপুরুষ প্রকৃতিনারী;\nকতই নামে কতই রূপ ধরি কত লীলা কর, লীলাময়ী ।।\nসকল আকারে আছ মা অন্তরে, জানিতে না পারে জীব তোমারে,\nতুমিই নিত্যা নিরাকারা চিদানন্দ-ব্রহ্মময়ী;\nতুমি কৃপা কর যারে সেই তোমারে জানিতে পারে,\nপ্রসীদ প্রসীদ প্রসীদ, দেবেশি,\nসাধকের হৃদিপদ্মে প্রকাশ, করুণাময়ী ।।"
+  },
+  {
+    "id": "song-39",
+    "title": "পাবি না ক্ষেপা মায়ের ক্ষেপার মত না ক্ষেপিলে",
+    "raag": "পরজ",
+    "taal": "বাহার—ঝাঁপতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "পাবি না ক্ষেপা মায়ের ক্ষেপার মত না ক্ষেপিলে\nসেয়ান পাগল বুঁচকি বগল, কাজ হবে না ওরূপ হলে ।।\nশুনিসেনা তুই ভবের কথা, এ যে বন্ধ্যার প্রসব ব্যথা\nসার করে শ্রীনাথের কথা চোখের ঠুলি দে না খুলে ।।\nমায়া মোহ ভোগ তৃষ্ণা দেবে তোরে যতই তাড়া,\nবোবার মত থাকবি বসে সে কথায় না দিয়ে সাড়া,\nনিবৃত্তিরে লয়ে সাথে, ভ্রমণ কর তত্ত্বপথে\nনৃত্য কর প্রেমে মেতে, সদা কালী কালী বলে ।।\nমজা আছে এ পাগলে, জানবি আসল পাগল হ’লে ।\n‘আয়রে পাগল ছেলে’ ব’লে, ঐ পাগলী মায়ে নেবে কোলে ।\nফুরাবে পাগলের মেলা ঘুচিবে ত্রিতাপের জ্বালা,\nশান্তিধামে করবি লীলা এ যুক্তি প্রেমকে বলে ।।"
+  },
+  {
+    "id": "song-40",
+    "title": "বড় ধুম লেগেছে হৃদিকমলে",
+    "raag": "সুরট",
+    "taal": "মল্লার—তেওরা",
+    "composer": "প্রচলিত",
+    "lyrics": "বড় ধুম লেগেছে হৃদিকমলে ।\nমজা দেখিছে আমার মন-পাগলে ।।\nহতেছে পাগলের মেলা ক্ষেপাতে ক্ষেপিতে মিলে,\nআনন্দেতে সদানন্দে আনন্দময়ী পড়েছে ঢলে ।।\nদেখে অবাক লেগেছে তাক্ ইন্দ্রিয় আর রিপুদলে,\nপেয়ে সুযোগ এই গোলযোগ জ্ঞানের কপাট গেছে খুলে;\nপ্রেমিক পাগল বলে সকল তা বলে আমার মন কি টলে\n(যার) পিতামাতা বদ্ধ-পাগল ভাল হয় কি তাদের ছেলে ।।\nশোন মা তারা ভূভার-হরা এই বেলা মা রাখছি বলে\n(যখন) ভাসব জলে অন্তকালে তনয় ব'লে করিস কোলে ।।"
+  },
+  {
+    "id": "song-41",
+    "title": "বামা কেরে এলো-চিকুরে!",
+    "raag": "ইমন কল্যাণ",
+    "taal": "ঝাঁপতাল",
+    "composer": "কমলাকান্ত",
+    "lyrics": "বামা কেরে এলো-চিকুরে!\nবিহরে আনন্দময়ী শব-হৃদিপরে ॥\nবসন নাহিক গায়,পদ্নগন্ধে অলি ধায়;\nচলে যেতে চলে পড়ে আসব-ভরে ॥\nযে ঠেঁকেছে রাঙা পায়,হত-দিতি-সুতচয়\nস্পর্শমাত্র শিব হয় সমর-মাঝারে ॥\nকমলাকান্তের ভাষী, সর্বনাশী, ধরে অসি;\nকরিলি সব কাশীবাসী জনমের তরে ॥\nStanza 1: The Identity and Posture\nবামা কেরে এলো-চিকুরে!\nবিহরে আনন্দময়ী শব-হৃদিপরে ॥\n\"Who is this Bāmā (Goddess) with disheveled hair?\" The Bāmā (Goddess) appears with her long, black hair loose and wild (এলো-চিকুরে), symbolizing her untamed nature and freedom from social restrictions. The inquiry (কেরে) expresses awe at this sudden, fierce appearance.\n\"The Blissful Mother (Anandamayī) sports upon the heart of the corpse.\" She is simultaneously the Blissful Mother (আনন্দময়ী) and the one who stands on the inert body of Lord Shiva (শব-হৃদিপরে).\nThis is a central philosophical statement: the Supreme Consciousness (Shiva, the corpse) is lifeless without the dynamic power of the Goddess (Kāli, the dancer).\nStanza 2: The Paradox of Purity and Intoxication\nবসন নাহিক গায়,পদ্নগন্ধে অলি ধায়;\nচলে যেতে চলে পড়ে আসব-ভরে ॥\nThis stanza highlights the paradox of Kāli's appearance, contrasting her terrifying nudity with her spiritual essence and ecstasy.\n\"She has no clothes on her body, yet bees rush towards the scent of the lotus.\" Her nudity (বসন নাহিক গায়) symbolizes her being unconstrained by illusion (Maya) or the covering of the material world.\nDespite her fierce form, her spiritual essence is so pure that a sweet, spiritual fragrance (like পদ্নগন্ধে or lotus scent) attracts devotees (like the অলি or bees).\n\"While walking, she stumbles and falls, full of intoxication.\" This intoxication (আসব-ভরে) is not from alcohol, but from her overwhelming divine ecstasy—the bliss of annihilating ignorance and ego. Her stumbling suggests the sheer, uncontrollable power of this spiritual frenzy.\nStanza 3: The Power of Transformation and Grace\nযে ঠেঁকেছে রাঙা পায়,হত-দিতি-সুতচয়\nস্পর্শমাত্র শিব হয় সমর-মাঝারে ॥\nThis stanza describes Kāli's power to grant ultimate liberation, even to her enemies.\n\"The multitude of slain sons of Diti (demons)—whoever merely touched her ruddy feet—became Shiva in the midst of the battle.\" The sons of Diti (দিতি-সুতচয়) are the demons, representing the spiritual enemies (vices and ego). The poet describes the incredible grace of the Mother: the moment the slain demons touch her red, sacred feet (রাঙা পায়), they are instantly transformed and achieve the state of Shiva (শিব হয়). This means her destruction is not punishment, but the ultimate act of Moksha (liberation).\nStanza 4: The Poet's Declaration and Final Verdict\nকমলাকান্তের ভাষী, সর্বনাশী, ধরে অসি;\nকরিলি সব কাশীবাসী জনমের তরে ॥\nThis is the concluding stanza, where the composer, Kamalakānta, offers his final realization of Kāli's ultimate benevolent role.\n\"Kamalakānta says, 'You, the Destroyer of everything, who wields the sword...'\" The composer, Kamalakānta (কমলাকান্তের ভাষী), addresses the Goddess using the epithet সর্বনাশী (\"Destroyer of all\"). By destroying \"everything,\" she removes the illusory boundaries that keep the soul separate from the divine.\"...You have made everyone a resident of Kashi forever.\" To be a resident of Kashi (কাশীবাসী) means to attain final salvation, as the city of Varanasi is believed to grant liberation upon death. The poet realizes that Kāli's destructive power is entirely merciful; by destroying the ego with her sword (অসি), she guarantees eternal liberation (জনমের তরে) for all beings.\n1. হত-দিতি-সুতচয় - refers to the slaying of the sons of Diti (the demons).\n2. বিহরে আনন্দময়ী শব-হৃদিপরে - Standing on the chest of Lord Shiva (who lies inert as a corpse - শব), she demonstrates her supremacy as Śakti (Energy), proving that without her, Śiva (Consciousness) is motionless and powerless.\n3. The Annihilation of Ego (সর্বনাশী): The epithet সর্বনাশী (sarbanāśī - \"Destroyer of everything\") is a spiritual compliment. Kāli does not destroy the world; she destroys the illusion and the Ego (Ahaṃkāra) that binds the devotee. She \"ruins\" the finite self to reveal the infinite Self.\n4. Her disheveled hair (এলো-চিকুরে) and her stumbling from intoxication (আসব-ভরে) symbolize her state of complete divine ecstasy (Bhāva). She operates beyond social laws and religious restrictions, embodying the freedom of the Tantric (Vāmācāra) path."
+  },
+  {
+    "id": "song-42",
+    "title": "বিফলে দিন যায় মা শ্যামা",
+    "raag": "মিশ্র বেহাগ",
+    "taal": "আদ্ধা",
+    "composer": "প্রচলিত",
+    "lyrics": "বিফলে দিন যায় মা শ্যামা,\nকবে দীনে দয়া হবে।\nদীন বলে কি দয়াময়ী\nচিরদিন দীন পড়ে রবে।।\nঅভাগা সন্তান যদি,\nমা কভু নয় তারে বাদী,\nতবে কেন নিরবধি,\nএ কাঙ্গাল পড়ে রবে।।\nষড়রিপু ভীষণ অরি;\nপরবশ হ’য়ে যে মরি,\nদে মা ‘শ্যামা’ চরণ-তরী\nভেবে পুত্র ভবার্ণবে।।"
+  },
+  {
+    "id": "song-43",
+    "title": "ভয়ঙ্করী তোরে কালী কে বলে মা তারা",
+    "raag": "মিশ্ররাগিণী",
+    "taal": "কাহারবা",
+    "composer": "প্রচলিত",
+    "lyrics": "ভয়ঙ্করী তোরে কালী কে বলে মা তারা।\nতোর অভয় চরণ ছুঁয়ে মা মোর ভয় হ’ল সব হারা ।।\nরুদ্রাণী তোর নাচন তালে প্রলয় যখন এগিয়ে চলে,\nহয় সেই প্রলয়ের অন্তরালে নূতন ভুবন গড়া ।।\nমায়া মোহে মত্ত হয়ে জীব যদি রয় ভুলে,\nমরণ ছলে তুই মা তারে  নিস্ গো কোলে তুলে ।।\nভবভয়ে ও শঙ্করী আমি যে মা ভয়ে মরি,\nআয় মা হ’য়ে ভয়ঙ্করী ভাঙ্গতে পাষাণ কারা।।"
+  },
+  {
+    "id": "song-44",
+    "title": "ভাব কি ভেবে পরান গেল",
+    "raag": "প্রসাদী",
+    "taal": "একতাল",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "ভাব কি ভেবে পরান গেল (মায়ের)\n(যাঁর) নামে হরে কাল, পদে মহাকাল, তাঁর কেন কাল রূপ হল ।\nকালরূপ অনেক আছে, এ বড় আশ্চর্য্য কালো,\n(যাঁরে) হৃদ্ মাঝারে রাখলে পরে হৃদয়পদ্ম করে আলো ।।\nনামে কালী রূপে কালী কালো হতেও অধিক কালো,\n(ও রূপ) যে দেখেছে সেই মজেছে অন্যরূপ লাগে না ভালো ।।\nপ্রসাদ বলে কুতূহলে, এমন মেয়ে কোথায় ছিল,\n(যাঁরে) না দেখে নাম শুনে কানে মন গিয়ে তায় লিপ্ত হল ।।"
+  },
+  {
+    "id": "song-45",
+    "title": "মজলো আমার মনভ্রমরা",
+    "raag": "সিন্ধু খাম্বাজ",
+    "taal": "দাদরা",
+    "composer": "কমলাকান্ত",
+    "lyrics": "মজলো আমার মনভ্রমরা শ্যামাপদ নীলকমলে।\nশ্যামাপদ নীলকমলে (মা) কালীপদ নীলকমলে\nযত বিষয় মধু তুচ্ছ হল কামাদি কুসুম সকলে ।।\nচরণ কালো ভ্রমর কালো, কালোয় কালো মিশে গেল;\nপঞ্চতত্ত্ব প্রধান মত্ত রঙ্গ দেখে ভঙ্গ দিলে ।।\nকমলাকান্তের মনে, আশা পূর্ণ এত দিনে;\n(তায়) সুখ দুঃখ সমান হ’ল আনন্দ-সাগর-উথলে ।।"
+  },
+  {
+    "id": "song-46",
+    "title": "মদমত্ত মাতঙ্গিনী উলঙ্গিনী নেচে ধায়",
+    "raag": "সাহানা",
+    "taal": "ঝাঁপতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "মদমত্ত মাতঙ্গিনী উলঙ্গিনী নেচে ধায়,\nনিবিড় কুন্তলদল বিজড়িত পায় পায় ।।\nনখরে অরুণ ছুটে পদচিহ্নে পদ্ম ফুটে,\nমকরন্দ গন্ধে অন্ধ ভৃঙ্গবৃন্দ গুঞ্জি ধায় ।।\nঅট্টহাস্য অবিরত তড়িত প্রকট কত,\nউজল ঝলকে আলো কালবরণ ঘটায় ।।"
+  },
+  {
+    "id": "song-47",
+    "title": "মন ছাঁচে তোমাকে ফেলে",
+    "raag": "সুরট",
+    "taal": "মল্লার—তেওরা",
+    "composer": "প্রচলিত",
+    "lyrics": "মন ছাঁচে তোমাকে ফেলে (শ্যামা),\nমনোময়ী মূর্ত্তি আজ লব তুলে ।।\nমন যে আমার খাদে ভরা তোমার ভাবে কই মা গলে,\nভাবরূপিণী হও তারিণী, গলে আমার ভাব-অনলে ।।\nদেখিব রূপ তোমার স্বরূপ যে রূপেতে ভোলা ভোলে\nপূরাও আশা, কৃত্তিবাসা, দিয়ে দেখা হৃদিকেমলে।\nগন্ধাজলে গঙ্গাপূজা কি হবে মা বনফুলে,\nকি দিয়ে পূজিব তোমায় ভাবছি বসে তাই বিরলে ।।\nআমি আমার নই জননি, আমার নাই কিছুই ভূতলে\nএ ব্রহ্মাণ্ড তোমার সৃষ্টি, দৃষ্টিহীনে আমার বলে।\nপ্রেমিক বলে শোনরে যুক্তি যথাশক্তি ভক্তিজলে,\nধুয়ে দে মার রাঙা-চরণ মন-ফুল দে পদতলে ।।\nকৃত্তিবাসা - means \"one who is clothed in animal hide.\"This is a very famous epithet for Lord Shiva, who is iconographically depicted wearing a tiger skin, symbolizing his mastery over all the forces of nature and his power as the supreme ascetic."
+  },
+  {
+    "id": "song-48",
+    "title": "মরি কি রূপ মাধুরী",
+    "raag": "মল্লার",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "মরি কি রূপ মাধুরী, (আহা মরি মরি) ।।\nভুবন-আভা মানস-লোভা কিবা শোভা নেহারি;\nবিহরে সমর-সাজে রে শিবানী শঙ্করী ।।\nঅধরে মৃদু হাসির রেখা, যেন গো দামিনী গগনে আঁকা,\nভকত-হৃদয়ে বিতরে আলো মোহ-তিমির নিবারি ।।\nশ্রবণে কুণ্ডল করে ঝলমল, গলে দোলে মণি মুকুতা মালা\nলোচন বিশাল কুন্তল দল, নিবিড় নীরদ যায় হারি ।।"
+  },
+  {
+    "id": "song-49",
+    "title": "মা আছেন আর আমি আছি",
+    "raag": "লগ্নী",
+    "taal": "খাম্বাজ—কাহারবা",
+    "composer": "প্রচলিত",
+    "lyrics": "মা আছেন আর আমি আছি ভাবনা কি আছে আমার ।\nমায়ের হাতে খাই পরি, মা নিয়েছেন আমার ভার ।।\nসংসার পাকে ঘোর বিপাকে যখন দেখবি অন্ধকার ।\nঅন্ধকারের বিপদ হ’তে মা যে করেছেন উদ্ধার ।।\n(এত) ভুলে থাকি তবুও দেখি ভুলে না মা একটি বার ।\n(বড়) স্নেহের আধার মা যে আমার, আমি যে মা’র, মা আমার ।।"
+  },
+  {
+    "id": "song-50",
+    "title": "মাকে দেখে বলে ভাবনা",
+    "raag": "ভীমপলশ্রী",
+    "taal": "কাওয়ালী",
+    "composer": "প্রচলিত",
+    "lyrics": "মাকে দেখে বলে ভাবনা – কেউ করো না আর।\nসে যে তোমার আমার মা শুধু নয় জগতের মা সবাকার।।\nমা যদি নিদয়া হত, তবে কি আর প্রসবিত,\nপৃথিবী শুকায়ে যেত, অন্ন বিনা হাহাকার।।\nঅস্পৃশ্য চণ্ডাল হতে ব্রাহ্মণাদি সকল জেতে,\nমা বলে ডাকিলে কভু হয় না নিষ্ফল তার।।\nঅঙ্গে দরদর ধারে, যবে স্বেদবিন্দু ঝরে,\nবায়ুরূপে কে তোমারে বাতাস করে অনিবার।।\nছেলের মুখে ‘মা’ ‘মা’ বাণী, শুনরেন বলে  ভবরানী,\nআড়াল থেকে শুনেন পাছে দেখিলে না ডাকে আর।।"
+  },
+  {
+    "id": "song-51",
+    "title": "যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে",
+    "raag": "কাংড়ালে",
+    "taal": "ঝাঁপতাল",
+    "composer": "কমলাকান্ত",
+    "lyrics": "যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে ।\nমন তুই দেখ্ আর আমি দেখি, আর যেন কেউ নাহি দেখে ।।\nকামাদিরে দিয়ে ফাঁকি, আয় মন বিরলে দেখি\nরসনারে সঙ্গে রাখি, সে যেন মা ব'লে ডাকে ।।\nকুরুচি কুমন্ত্রী যত, নিকট হ'তে দিও নাক,\nজ্ঞান নয়নে প্রহরী রেখ, সে যেন সাবধানে থাকে ।\nকমলাকান্তের মন ভাই আমার এক নিবেদন,\nদরিদ্রে পাইলে ধন, সে কি অযতনে রাখে ।।"
+  },
+  {
+    "id": "song-52",
+    "title": "রণবেশে হেসে হেসে ঐ বামা এসেছে",
+    "raag": "মিশ্র বেহাগ",
+    "taal": "কাওয়ালী",
+    "composer": "প্রচলিত",
+    "lyrics": "রণবেশে হেসে হেসে ঐ বামা এসেছে।\nকরে অসি পদে শশী কি রূপসী সেজেছে ।।\nনয়নে অনল জ্বলে, নরশির শোভে গলে,\nদলিতে দনুজদলে ঢলে ঢলে চলেছে ।।\nরুধির লেগেছে গায়, নীল জলে জবা প্রায়,\nআঁখি না ফিরিতে চায়, কি সুখেতে মজেছে ।\nআ মরি কি রূপ হায়, অরূপ উথলে তায়,\nসাধে কিরে ঐ পায় পশুপতি পড়েছে ।।"
+  },
+  {
+    "id": "song-53",
+    "title": "রণে নেমেছে রে কার বামা",
+    "raag": "অনির্দিষ্ট",
+    "taal": "অনির্দিষ্ট",
+    "composer": "প্রচলিত",
+    "lyrics": "রণে নেমেছে রে কার বামা ওকে দেখতে যাবি\n(তোরা) দেখতে যাবি, দেখতে যাবি, রূপ দেখলে অবাক হবি ॥\n(মায়ের) মাথার মুকুট গগন ঠেকে গলায় নরশির-হার\nপদভার সইতে নারে ধরা হ'ল ভার ॥\n(মায়ের) রূপ ত নয়, আ মরি যাই কাজল জিনেও কালো\n(আবার) কি অদ্ভুত মূর্ত্তি ধরে ভুবন করে আলো ॥\nIn Hindu scripture, most famously the Devi Mahatmyam (part of the Markandeya Purana), Kāli appears on the battlefield as the fiercest form of the Great Goddess (Durga/Parvati) to defeat demons who cannot be conquered by anyone else.The most famous instance is the battle against the demon Raktabīja (\"Blood-Seed\"):\nThe Problem: Raktabīja had a boon where every drop of his blood that touched the ground would instantly create a new, identical demon. The other gods and goddesses were only making the demon army larger.\nKāli's Solution: Kāli emerges from the brow of Durga in an explosion of divine wrath. Her role is to drink every single drop of blood from Raktabīja before it can reach the earth and create a clone. She then devours the countless clones\nThe Song's Imagery: This is why the song describes her with a garland of human heads (representing the demons she has destroyed) and a footfall so heavy the earth cannot bear it (পদভার সইতে নারে ধরা হ'ল ভার)—she is drunk with the blood of the slain and in a frenzy of destruction."
+  },
+  {
+    "id": "song-54",
+    "title": "লম্বিত গলে মুণ্ডমাল দম্ভিতা ধনি মুখ-করাল",
+    "raag": "কানাড়া",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "লম্বিত গলে মুণ্ডমাল দম্ভিতা ধনি মুখ-করাল\nস্তম্ভিত পদে মহাকাল, কম্পিতা ভয়ে মেদিনী ।।\nদিগ্বসনা চন্দ্র-ভাল, এলায়ে পড়েছে কেশজাল,\nশোভিত অসি করে কপাল প্রখরা শিখরি নন্দিনী ।।\nচারিদিকে কত দিকপাল, ভৈরবী শিবা তালবেতাল,\nঅতি অপরূপ রূপ বিশাল কালী কলুষনাশিনী ।।\nA garland of severed heads hangs upon her neck; she is majestic, and her face is terrifying. At her feet lies Mahakala (Lord Shiva), stunned and motionless, while the very Earth trembles in fear of her.\nShe is sky-clad, with the crescent moon on her forehead and a disheveled mass of unbound hair. Her hands are adorned with a sword and a severed head. She is the fierce Daughter of the Mountain (an epithet for Parvati, daughter of Himavat).\nSurrounding her are countless celestial guardians, fierce Bhairavis, jackals, and spirits like Tala and Vetala. This immense and uniquely terrifying form belongs to Kali, the ultimate destroyer of all sins.\nলম্বিত Hanging / Dangling\nগলে On the neck\nমুণ্ডমাল A garland of severed heads\nদম্ভিতা Proud / Majestic\nধনি O beautiful / excellent one! (a term of address)\nমুখ-করাল Whose face is fearsome\nস্তম্ভিত Stunned / Paralyzed / Motionless\nপদে At her feet\nমহাকাল Mahakala (Great Time), an epithet for Lord Shiva\nকম্পিতা Trembling\nভয়ে In fear\nমেদিনী The Earth\nদিগ্বসনা Clothed in the directions (i.e., sky-clad, nude)\nচন্দ্র-ভাল Whose forehead is adorned with the moon\nএলায়ে পড়েছে Has fallen loose / Is disheveled\nকেশজাল A mass (net) of hair\nশোভিত Adorned with\nঅসি A sword\nকরে In her hand\nকপাল A severed head / skull\nপ্রখরা Fierce / Intense\nশিখরি Mountain Peak\nনন্দিনী Daughter\nচারিদিকে On all four sides / All around\nকত So many\nদিকপাল The guardians of the directions (cosmic deities)\nভৈরবী Fierce female attendants/spirits\nশিবা Female jackals (her companions in the cremation ground)\nতালবেতাল A pair of spirits (Tala and Vetala) in her retinue\nঅতি Extremely\nঅপরূপ Uniquely beautiful / Unparalleled in form\nরূপ Form / Appearance\nবিশাল Vast / Immense\nকলুষনাশিনী The destroyer of sins and impurities"
+  },
+  {
+    "id": "song-55",
+    "title": "শঙ্করী-চরণে মন মগ্ন হয়ে রও রে",
+    "raag": "অনির্দিষ্ট",
+    "taal": "অনির্দিষ্ট",
+    "composer": "কমলাকান্ত",
+    "lyrics": "শঙ্করী-চরণে মন মগ্ন হয়ে রও রে ।\nমগ্ন হয়ে রও রে,সব যন্ত্রণা এড়াও রে ।\nএ তিন সংসার মিছে,মিছে ভ্রমিয়ে বেড়াও রে ।\nকুলকুণ্ডলিনী ব্রহ্মময়ী অন্তরে ধিয়াও রে ।\nকমলাকান্তের বাণী, শ্যামা মায়ের গুণ গাও রে ।\nএ তো সুখের নদী নিরবধি, ধীরে ধীরে বাও রে ।"
+  },
+  {
+    "id": "song-56",
+    "title": "শতকোটি-শশী হাসে (মায়ের) চরণ নখরে",
+    "raag": "ভৈরবী",
+    "taal": "ঝাঁপতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "শতকোটি-শশী হাসে (মায়ের) চরণ নখরে ।\nআলো করে কালোরূপ (মায়ের), হৃদয় কন্দরে ।।\nপ্রীতির সাগর উছলে নয়নে, উজ্জ্বল কপোল প্রসন্ন বয়ানে ।\nমনে হয় রাখি নয়নে নয়নে ।\n(বাঁধি) হৃদি কারাগারে, তারে চিরদিন তরে ।।\nবাঞ্ছা বাধা পড়ে হৃদয় মাঝারে, কোটি মনোহর হর মনোহরে,\nউরু চারু অতি চরণ যুগল, হৃদি বিয়াকুল করে ।\n(তাহে) চাহে মিশিবারে ।।\nএস এস অয়ি ভুবন মোহিনী সর্বস্ব আমার, আমার জননী।\n(মাগো) ফিরে চাও যদি কৃপা কর যদি\nপড়ুক অশনী শিরে—(আমি) লব সাধ করে ।"
+  },
+  {
+    "id": "song-57",
+    "title": "শ্যামা মা কি আমার কাল রে",
+    "raag": "মিশ্র মল্লার",
+    "taal": "একতাল",
+    "composer": "কমলাকান্ত",
+    "lyrics": "শ্যামা মা কি আমার কাল রে ।\nকালরূপে দিগম্বরী হৃদিপদ্ম করে আলো রে ।\nলোকে বলে কালী কাল, আমার মন তো বলে না কাল রে ।।\nকখনও শ্বেত কখনও পীত, কখনও নীল লোহিত রে,\n(আমি) আগে নাহি জানি কেমন জননী, ভাবিয়ে জনম গেল রে ।।\nকখনও পুরুষ কখনও প্রকৃতি, কখনও শূন্যরূপা রে,\n(মায়ের) এভাব ভাবিয়ে কমলাকান্ত, সহজে পাগল হ’ল রে ।।"
+  },
+  {
+    "id": "song-58",
+    "title": "শ্যামা সঙ্গীত",
+    "raag": "অনির্দিষ্ট",
+    "taal": "অনির্দিষ্ট",
+    "composer": "প্রচলিত",
+    "lyrics": "---\n[অন্তরে জাগিছ গো মা](%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%97%E0%A6%BF%E0%A6%9B%20%E0%A6%97%E0%A7%8B%20%E0%A6%AE%E0%A6%BE%2029178778907c808bb590f0b331fc7e71.md)\n[অভয়-পদে প্রাণ সঁপেছি](%E0%A6%85%E0%A6%AD%E0%A6%AF%E0%A6%BC-%E0%A6%AA%E0%A6%A6%E0%A7%87%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%A3%20%E0%A6%B8%E0%A6%81%E0%A6%AA%E0%A7%87%E0%A6%9B%E0%A6%BF%2029178778907c80d88f0ced1bed3edb33.md)\n[অভয়ার অভয়পদ কর মন সার](%E0%A6%85%E0%A6%AD%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%85%E0%A6%AD%E0%A6%AF%E0%A6%BC%E0%A6%AA%E0%A6%A6%20%E0%A6%95%E0%A6%B0%20%E0%A6%AE%E0%A6%A8%20%E0%A6%B8%E0%A6%BE%E0%A6%B0%2029178778907c808585e2f7da5dcf987d.md)\n[আমার মাকে কি দেখেছিস্ তোরা](%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0%20%E0%A6%AE%E0%A6%BE%E0%A6%95%E0%A7%87%20%E0%A6%95%E0%A6%BF%20%E0%A6%A6%E0%A7%87%E0%A6%96%E0%A7%87%E0%A6%9B%E0%A6%BF%E0%A6%B8%E0%A7%8D%20%E0%A6%A4%E0%A7%8B%E0%A6%B0%E0%A6%BE%2029178778907c8001924ec5499357d8d3.md)\n[আমরা মায়ের ছেলে, আমরা মায়ের ছেলে](%E0%A6%86%E0%A6%AE%E0%A6%B0%E0%A6%BE%20%E0%A6%AE%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87,%20%E0%A6%86%E0%A6%AE%E0%A6%B0%E0%A6%BE%20%E0%A6%AE%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%2029178778907c8032a5f6c053de9b7b63.md)\n[আমার মা ত্বং হি তারা](%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0%20%E0%A6%AE%E0%A6%BE%20%E0%A6%A4%E0%A7%8D%E0%A6%AC%E0%A6%82%20%E0%A6%B9%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BE%2029178778907c80a9951ff4bc17081134.md)\n[আর কিছু নাই সংসারের মাঝে](%E0%A6%86%E0%A6%B0%20%E0%A6%95%E0%A6%BF%E0%A6%9B%E0%A7%81%20%E0%A6%A8%E0%A6%BE%E0%A6%87%20%E0%A6%B8%E0%A6%82%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0%20%E0%A6%AE%E0%A6%BE%E0%A6%9D%E0%A7%87%2029178778907c80b29718d16e4074bbbb.md)\n[আশাবাসা ঘোর-তমোনাশা বামা কে](%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A6%BE%20%E0%A6%98%E0%A7%8B%E0%A6%B0-%E0%A6%A4%E0%A6%AE%E0%A7%8B%E0%A6%A8%E0%A6%BE%E0%A6%B6%E0%A6%BE%20%E0%A6%AC%E0%A6%BE%E0%A6%AE%E0%A6%BE%20%E0%A6%95%E0%A7%87%2029178778907c80d489f9f11579a58853.md)\n[আহা মরি মরি রে, কিরূপ মাধুরী](%E0%A6%86%E0%A6%B9%E0%A6%BE%20%E0%A6%AE%E0%A6%B0%E0%A6%BF%20%E0%A6%AE%E0%A6%B0%E0%A6%BF%20%E0%A6%B0%E0%A7%87,%20%E0%A6%95%E0%A6%BF%E0%A6%B0%E0%A7%82%E0%A6%AA%20%E0%A6%AE%E0%A6%BE%E0%A6%A7%E0%A7%81%E0%A6%B0%E0%A7%80%2029178778907c804bb8b4ca015262bcb4.md)\n[একবার বিরাজ গো মা হৃদি কমলাসনে](%E0%A6%8F%E0%A6%95%E0%A6%AC%E0%A6%BE%E0%A6%B0%20%E0%A6%AC%E0%A6%BF%E0%A6%B0%E0%A6%BE%E0%A6%9C%20%E0%A6%97%E0%A7%8B%20%E0%A6%AE%E0%A6%BE%20%E0%A6%B9%E0%A7%83%E0%A6%A6%E0%A6%BF%20%E0%A6%95%E0%A6%AE%E0%A6%B2%E0%A6%BE%E0%A6%B8%E0%A6%A8%E0%A7%87%2029178778907c8022bee0cf5ac95a60f9.md)\n[ওমা ভবভয়বারিণী](%E0%A6%93%E0%A6%AE%E0%A6%BE%20%E0%A6%AD%E0%A6%AC%E0%A6%AD%E0%A6%AF%E0%A6%BC%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%A3%E0%A7%80%2029178778907c807cae94e4cdbc43941b.md)\n[ওঁ সর্বমঙ্গলমঙ্গল্যে, শিবে, সর্বার্থসাধিকে](%E0%A6%93%E0%A6%81%20%E0%A6%B8%E0%A6%B0%E0%A7%8D%E0%A6%AC%E0%A6%AE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%B2%E0%A6%AE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AF%E0%A7%87,%20%E0%A6%B6%E0%A6%BF%E0%A6%AC%E0%A7%87,%20%E0%A6%B8%E0%A6%B0%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%BE%E0%A6%A7%E0%A6%BF%E0%A6%95%E0%A7%87%2029178778907c808983c5cf8ac570f5e3.md)\n[(এমা) কালভয় বারিণী কপালিনী কালরূপিণী]((%E0%A6%8F%E0%A6%AE%E0%A6%BE)%20%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%AD%E0%A6%AF%E0%A6%BC%20%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%A3%E0%A7%80%20%E0%A6%95%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%B0%E0%A7%82%E0%A6%AA%E0%A6%BF%E0%A6%A3%E0%A7%80%2029178778907c80bb8afbddb534b319f9.md)\n[কত চাঁদ শ্রীপদ-নখ-ফাঁদে সুধা আসে](%E0%A6%95%E0%A6%A4%20%E0%A6%9A%E0%A6%BE%E0%A6%81%E0%A6%A6%20%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%80%E0%A6%AA%E0%A6%A6-%E0%A6%A8%E0%A6%96-%E0%A6%AB%E0%A6%BE%E0%A6%81%E0%A6%A6%E0%A7%87%20%E0%A6%B8%E0%A7%81%E0%A6%A7%E0%A6%BE%20%E0%A6%86%E0%A6%B8%E0%A7%87%201e178778907c814d84dcfa589908d4ad.md)\n[কখনো কি রঙ্গে থাক মা](%E0%A6%95%E0%A6%96%E0%A6%A8%E0%A7%8B%20%E0%A6%95%E0%A6%BF%20%E0%A6%B0%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%87%20%E0%A6%A5%E0%A6%BE%E0%A6%95%20%E0%A6%AE%E0%A6%BE%201e178778907c81e89fbdf73c5ace5cbe.md)\n[কলুষ নাশিনী তারা ](%E0%A6%95%E0%A6%B2%E0%A7%81%E0%A6%B7%20%E0%A6%A8%E0%A6%BE%E0%A6%B6%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BE%2029178778907c80158bade2247ba58548.md)\n[কালী কপালিনী পূর্ণ সনাতনী](%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%80%20%E0%A6%95%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%20%E0%A6%B8%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A6%A8%E0%A7%80%201e178778907c815ebfedf4ee742c4de4.md)\n[কালী কালী বল রসনা](%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%80%20%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%80%20%E0%A6%AC%E0%A6%B2%20%E0%A6%B0%E0%A6%B8%E0%A6%A8%E0%A6%BE%201e178778907c8133a694ced77ab2fda0.md)\n[কে গো আমার মা কি এলি।](%E0%A6%95%E0%A7%87%20%E0%A6%97%E0%A7%8B%20%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0%20%E0%A6%AE%E0%A6%BE%20%E0%A6%95%E0%A6%BF%20%E0%A6%8F%E0%A6%B2%E0%A6%BF%E0%A5%A4%201e178778907c81129835d0296b9bb768.md)\n[কে এল এলোকেশে ন্যাংটা বেশে রণেতে](%E0%A6%95%E0%A7%87%20%E0%A6%8F%E0%A6%B2%20%E0%A6%8F%E0%A6%B2%E0%A7%8B%E0%A6%95%E0%A7%87%E0%A6%B6%E0%A7%87%20%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%82%E0%A6%9F%E0%A6%BE%20%E0%A6%AC%E0%A7%87%E0%A6%B6%E0%A7%87%20%E0%A6%B0%E0%A6%A3%E0%A7%87%E0%A6%A4%E0%A7%87%2029178778907c800493dac328da6adea5.md)\n[ক্ষেপার হাটবাজার](%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%87%E0%A6%AA%E0%A6%BE%E0%A6%B0%20%E0%A6%B9%E0%A6%BE%E0%A6%9F%E0%A6%AC%E0%A6%BE%E0%A6%9C%E0%A6%BE%E0%A6%B0%2029178778907c80fa8369c951b3816c25.md)\n[গয়া গঙ্গা প্রভাসাদি ](%E0%A6%97%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BE%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%AD%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%A6%E0%A6%BF%201e178778907c8143ab3ff59c16912f1b.md)\n[জগতজননী, আমায় তারাও গো মা তারা](%E0%A6%9C%E0%A6%97%E0%A6%A4%E0%A6%9C%E0%A6%A8%E0%A6%A8%E0%A7%80,%20%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%AF%E0%A6%BC%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A6%93%20%E0%A6%97%E0%A7%8B%20%E0%A6%AE%E0%A6%BE%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BE%201e178778907c8199be48dd6b926da173.md)\n[জগত জননী আসিয়াছে আজি](%E0%A6%9C%E0%A6%97%E0%A6%A4%20%E0%A6%9C%E0%A6%A8%E0%A6%A8%E0%A7%80%20%E0%A6%86%E0%A6%B8%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%9B%E0%A7%87%20%E0%A6%86%E0%A6%9C%E0%A6%BF%201e178778907c8153a904c612154c4006.md)\n[জয় জয় জগজননী দেবী](%E0%A6%9C%E0%A6%AF%E0%A6%BC%20%E0%A6%9C%E0%A6%AF%E0%A6%BC%20%E0%A6%9C%E0%A6%97%E0%A6%9C%E0%A6%A8%E0%A6%A8%E0%A7%80%20%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80%201e178778907c8134b886c64fc2e9c77e.md)\n[জাগো, জাগো দয়াময়ী জননী](%E0%A6%9C%E0%A6%BE%E0%A6%97%E0%A7%8B,%20%E0%A6%9C%E0%A6%BE%E0%A6%97%E0%A7%8B%20%E0%A6%A6%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%AE%E0%A6%AF%E0%A6%BC%E0%A7%80%20%E0%A6%9C%E0%A6%A8%E0%A6%A8%E0%A7%80%2029178778907c801abeecfda3679ebe6e.md)\n[ঢলিয়ে ঢলিয়ে কে আসে](%E0%A6%A2%E0%A6%B2%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%A2%E0%A6%B2%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B8%E0%A7%87%2029178778907c8017b522f735cf2e1ba5.md)\n[ত্বং অপারা, বিশ্বসারা](%E0%A6%A4%E0%A7%8D%E0%A6%AC%E0%A6%82%20%E0%A6%85%E0%A6%AA%E0%A6%BE%E0%A6%B0%E0%A6%BE,%20%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%8D%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BE%201e178778907c817c8318d2abd8ffd421.md)\n[দনুজদলনী, নিজজন-প্রতিপালিনী শ্রীকালী](%E0%A6%A6%E0%A6%A8%E0%A7%81%E0%A6%9C%E0%A6%A6%E0%A6%B2%E0%A6%A8%E0%A7%80,%20%E0%A6%A8%E0%A6%BF%E0%A6%9C%E0%A6%9C%E0%A6%A8-%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A4%E0%A6%BF%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%80%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%80%201e178778907c81b5896fe48e34596127.md)\n[দয়াময়ী হয়ে গো মা নিদয়া হ’য়ো না শ্যামা](%E0%A6%A6%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%AE%E0%A6%AF%E0%A6%BC%E0%A7%80%20%E0%A6%B9%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%97%E0%A7%8B%20%E0%A6%AE%E0%A6%BE%20%E0%A6%A8%E0%A6%BF%E0%A6%A6%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B9%E2%80%99%E0%A6%AF%E0%A6%BC%E0%A7%8B%20%E0%A6%A8%E0%A6%BE%20%E0%A6%B6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AE%E0%A6%BE%201e178778907c813fae30d9737a54ac49.md)\n[দুর্গে দলনী দুঃখ, দারিদ্র্যদহনী](%E0%A6%A6%E0%A7%81%E0%A6%B0%E0%A7%8D%E0%A6%97%E0%A7%87%20%E0%A6%A6%E0%A6%B2%E0%A6%A8%E0%A7%80%20%E0%A6%A6%E0%A7%81%E0%A6%83%E0%A6%96,%20%E0%A6%A6%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A7%8D%E0%A6%AF%E0%A6%A6%E0%A6%B9%E0%A6%A8%E0%A7%80%2029178778907c80c6a5b7e99d677384bd.md)\n[দুরিতবারিণি ওমা হররাণি ডাকিছে কাতরে](%E0%A6%A6%E0%A7%81%E0%A6%B0%E0%A6%BF%E0%A6%A4%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%A3%E0%A6%BF%20%E0%A6%93%E0%A6%AE%E0%A6%BE%20%E0%A6%B9%E0%A6%B0%E0%A6%B0%E0%A6%BE%E0%A6%A3%E0%A6%BF%20%E0%A6%A1%E0%A6%BE%E0%A6%95%E0%A6%BF%E0%A6%9B%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%A4%E0%A6%B0%E0%A7%87%2029178778907c80fc8ab0ea95d604c399.md)\n[দেহি পদতরনী, জননী](%E0%A6%A6%E0%A7%87%E0%A6%B9%E0%A6%BF%20%E0%A6%AA%E0%A6%A6%E0%A6%A4%E0%A6%B0%E0%A6%A8%E0%A7%80,%20%E0%A6%9C%E0%A6%A8%E0%A6%A8%E0%A7%80%201e178778907c8100b84df9c90f916a5c.md)\n[দ্যাখনা সমর আলো করে রে কার কামিনী](%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%96%E0%A6%A8%E0%A6%BE%20%E0%A6%B8%E0%A6%AE%E0%A6%B0%20%E0%A6%86%E0%A6%B2%E0%A7%8B%20%E0%A6%95%E0%A6%B0%E0%A7%87%20%E0%A6%B0%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%A8%E0%A7%80%2029178778907c808abd43cb77a5777d5a.md)\n[নব-সজল-জলধর-কায়](%E0%A6%A8%E0%A6%AC-%E0%A6%B8%E0%A6%9C%E0%A6%B2-%E0%A6%9C%E0%A6%B2%E0%A6%A7%E0%A6%B0-%E0%A6%95%E0%A6%BE%E0%A6%AF%E0%A6%BC%201e178778907c8195be99ebfbd38f8ef3.md)\n[নমামি ত্বং তারিণী](%E0%A6%A8%E0%A6%AE%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A4%E0%A7%8D%E0%A6%AC%E0%A6%82%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%A3%E0%A7%80%2029178778907c8083a192ffea7e3b3142.md)\n[নীলবরণী, নবীনা রমণী](%E0%A6%A8%E0%A7%80%E0%A6%B2%E0%A6%AC%E0%A6%B0%E0%A6%A3%E0%A7%80,%20%E0%A6%A8%E0%A6%AC%E0%A7%80%E0%A6%A8%E0%A6%BE%20%E0%A6%B0%E0%A6%AE%E0%A6%A3%E0%A7%80%2029178778907c80f287e9c45de8341f79.md)\n[পঙ্কজ বনে রাত্রিদিনে](%E0%A6%AA%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%9C%20%E0%A6%AC%E0%A6%A8%E0%A7%87%20%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A7%87%2029178778907c801b96e3eea71ee20387.md)\n[পাবি না ক্ষেপা মায়ের ক্ষেপার মত না ক্ষেপিলে](%E0%A6%AA%E0%A6%BE%E0%A6%AC%E0%A6%BF%20%E0%A6%A8%E0%A6%BE%20%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%87%E0%A6%AA%E0%A6%BE%20%E0%A6%AE%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%87%E0%A6%AA%E0%A6%BE%E0%A6%B0%20%E0%A6%AE%E0%A6%A4%20%E0%A6%A8%E0%A6%BE%20%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%87%E0%A6%AA%E0%A6%BF%E0%A6%B2%E0%A7%87%2029178778907c8044a803c9e3992f3cb6.md)\n[বড় ধুম লেগেছে হৃদিকমলে](%E0%A6%AC%E0%A6%A1%E0%A6%BC%20%E0%A6%A7%E0%A7%81%E0%A6%AE%20%E0%A6%B2%E0%A7%87%E0%A6%97%E0%A7%87%E0%A6%9B%E0%A7%87%20%E0%A6%B9%E0%A7%83%E0%A6%A6%E0%A6%BF%E0%A6%95%E0%A6%AE%E0%A6%B2%E0%A7%87%2029178778907c80008103c6e7b1a4b8be.md)\n[বামা কেরে এলো-চিকুরে!](%E0%A6%AC%E0%A6%BE%E0%A6%AE%E0%A6%BE%20%E0%A6%95%E0%A7%87%E0%A6%B0%E0%A7%87%20%E0%A6%8F%E0%A6%B2%E0%A7%8B-%E0%A6%9A%E0%A6%BF%E0%A6%95%E0%A7%81%E0%A6%B0%E0%A7%87!%201e178778907c812491e4eb5c1d1bbdd8.md)\n[বিফলে দিন যায় মা শ্যামা](%E0%A6%AC%E0%A6%BF%E0%A6%AB%E0%A6%B2%E0%A7%87%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC%20%E0%A6%AE%E0%A6%BE%20%E0%A6%B6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AE%E0%A6%BE%201e178778907c81da860bc8fccdbb1947.md)\n[ভয়ঙ্করী তোরে কালী কে বলে মা তারা](%E0%A6%AD%E0%A6%AF%E0%A6%BC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%B0%E0%A7%80%20%E0%A6%A4%E0%A7%8B%E0%A6%B0%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%80%20%E0%A6%95%E0%A7%87%20%E0%A6%AC%E0%A6%B2%E0%A7%87%20%E0%A6%AE%E0%A6%BE%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BE%201e178778907c818bad59de2756996fc0.md)\n[ভাব কি ভেবে পরান গেল](%E0%A6%AD%E0%A6%BE%E0%A6%AC%20%E0%A6%95%E0%A6%BF%20%E0%A6%AD%E0%A7%87%E0%A6%AC%E0%A7%87%20%E0%A6%AA%E0%A6%B0%E0%A6%BE%E0%A6%A8%20%E0%A6%97%E0%A7%87%E0%A6%B2%2029178778907c80aa9bfdd74c79a86bd9.md)\n[মজলো আমার মনভ্রমরা](%E0%A6%AE%E0%A6%9C%E0%A6%B2%E0%A7%8B%20%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0%20%E0%A6%AE%E0%A6%A8%E0%A6%AD%E0%A7%8D%E0%A6%B0%E0%A6%AE%E0%A6%B0%E0%A6%BE%2029178778907c8014ad17f72f17febb8a.md)\n[মদমত্ত মাতঙ্গিনী উলঙ্গিনী নেচে ধায়](%E0%A6%AE%E0%A6%A6%E0%A6%AE%E0%A6%A4%E0%A7%8D%E0%A6%A4%20%E0%A6%AE%E0%A6%BE%E0%A6%A4%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%89%E0%A6%B2%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%A8%E0%A7%87%E0%A6%9A%E0%A7%87%20%E0%A6%A7%E0%A6%BE%E0%A6%AF%E0%A6%BC%2029178778907c8089b723ff1a1cc933b5.md)\n[মন ছাঁচে তোমাকে ফেলে](%E0%A6%AE%E0%A6%A8%20%E0%A6%9B%E0%A6%BE%E0%A6%81%E0%A6%9A%E0%A7%87%20%E0%A6%A4%E0%A7%8B%E0%A6%AE%E0%A6%BE%E0%A6%95%E0%A7%87%20%E0%A6%AB%E0%A7%87%E0%A6%B2%E0%A7%87%2029178778907c80beb860d56456ba3570.md)\n[মরি কি রূপ মাধুরী](%E0%A6%AE%E0%A6%B0%E0%A6%BF%20%E0%A6%95%E0%A6%BF%20%E0%A6%B0%E0%A7%82%E0%A6%AA%20%E0%A6%AE%E0%A6%BE%E0%A6%A7%E0%A7%81%E0%A6%B0%E0%A7%80%2029178778907c80b1b715cfeda36a5d47.md)\n[মাকে দেখে বলে ভাবনা](%E0%A6%AE%E0%A6%BE%E0%A6%95%E0%A7%87%20%E0%A6%A6%E0%A7%87%E0%A6%96%E0%A7%87%20%E0%A6%AC%E0%A6%B2%E0%A7%87%20%E0%A6%AD%E0%A6%BE%E0%A6%AC%E0%A6%A8%E0%A6%BE%201e178778907c811890d3dce455e9c4c0.md)\n[মা আছেন আর আমি আছি](%E0%A6%AE%E0%A6%BE%20%E0%A6%86%E0%A6%9B%E0%A7%87%E0%A6%A8%20%E0%A6%86%E0%A6%B0%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%86%E0%A6%9B%E0%A6%BF%2029178778907c80e08cb9eaa535dc1c1b.md)\n[রণবেশে হেসে হেসে ঐ বামা এসেছে](%E0%A6%B0%E0%A6%A3%E0%A6%AC%E0%A7%87%E0%A6%B6%E0%A7%87%20%E0%A6%B9%E0%A7%87%E0%A6%B8%E0%A7%87%20%E0%A6%B9%E0%A7%87%E0%A6%B8%E0%A7%87%20%E0%A6%90%20%E0%A6%AC%E0%A6%BE%E0%A6%AE%E0%A6%BE%20%E0%A6%8F%E0%A6%B8%E0%A7%87%E0%A6%9B%E0%A7%87%2029178778907c8063a8f7ec225c4a3f61.md)\n[রণে নেমেছে রে কার বামা ](%E0%A6%B0%E0%A6%A3%E0%A7%87%20%E0%A6%A8%E0%A7%87%E0%A6%AE%E0%A7%87%E0%A6%9B%E0%A7%87%20%E0%A6%B0%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B0%20%E0%A6%AC%E0%A6%BE%E0%A6%AE%E0%A6%BE%201e178778907c81e5b0d0e51420ff30a9.md)\n[লম্বিত গলে মুণ্ডমাল দম্ভিতা ধনি মুখ-করাল](%E0%A6%B2%E0%A6%AE%E0%A7%8D%E0%A6%AC%E0%A6%BF%E0%A6%A4%20%E0%A6%97%E0%A6%B2%E0%A7%87%20%E0%A6%AE%E0%A7%81%E0%A6%A3%E0%A7%8D%E0%A6%A1%E0%A6%AE%E0%A6%BE%E0%A6%B2%20%E0%A6%A6%E0%A6%AE%E0%A7%8D%E0%A6%AD%E0%A6%BF%E0%A6%A4%E0%A6%BE%20%E0%A6%A7%E0%A6%A8%E0%A6%BF%20%E0%A6%AE%E0%A7%81%E0%A6%96-%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%B2%2029178778907c80b3a5cee3d34b5d0a21.md)\n[শতকোটি-শশী হাসে (মায়ের) চরণ নখরে](%E0%A6%B6%E0%A6%A4%E0%A6%95%E0%A7%8B%E0%A6%9F%E0%A6%BF-%E0%A6%B6%E0%A6%B6%E0%A7%80%20%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A7%87%20(%E0%A6%AE%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0)%20%E0%A6%9A%E0%A6%B0%E0%A6%A3%20%E0%A6%A8%E0%A6%96%E0%A6%B0%E0%A7%87%2029178778907c80d989a7f6ffad23121f.md)\n[শ্যামা মা কি আমার কাল রে](%E0%A6%B6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AE%E0%A6%BE%20%E0%A6%AE%E0%A6%BE%20%E0%A6%95%E0%A6%BF%20%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B2%20%E0%A6%B0%E0%A7%87%2029178778907c800ba53fe446a2f80e14.md)\n[শঙ্করী-চরণে মন মগ্ন হয়ে রও রে](%E0%A6%B6%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%B0%E0%A7%80-%E0%A6%9A%E0%A6%B0%E0%A6%A3%E0%A7%87%20%E0%A6%AE%E0%A6%A8%20%E0%A6%AE%E0%A6%97%E0%A7%8D%E0%A6%A8%20%E0%A6%B9%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%B0%E0%A6%93%20%E0%A6%B0%E0%A7%87%2029178778907c80d8bcd3f4b6b8693586.md)\n[সদানন্দময়ী কালী, মহাকালের মনোমোহিনী](%E0%A6%B8%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A6%AE%E0%A6%AF%E0%A6%BC%E0%A7%80%20%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%80,%20%E0%A6%AE%E0%A6%B9%E0%A6%BE%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%87%E0%A6%B0%20%E0%A6%AE%E0%A6%A8%E0%A7%8B%E0%A6%AE%E0%A7%8B%E0%A6%B9%E0%A6%BF%E0%A6%A8%E0%A7%80%2029178778907c80f7b4dfd2a316e807e2.md)\n[সমরে নাচে রে কার এ রমণী](%E0%A6%B8%E0%A6%AE%E0%A6%B0%E0%A7%87%20%E0%A6%A8%E0%A6%BE%E0%A6%9A%E0%A7%87%20%E0%A6%B0%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B0%20%E0%A6%8F%20%E0%A6%B0%E0%A6%AE%E0%A6%A3%E0%A7%80%2029178778907c80fa9f94f14cf923b1cc.md)\n[সিংহচারী খপথ ধাওয়ে](%E0%A6%B8%E0%A6%BF%E0%A6%82%E0%A6%B9%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%80%20%E0%A6%96%E0%A6%AA%E0%A6%A5%20%E0%A6%A7%E0%A6%BE%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%2029178778907c80d79464d133ccbcb108.md)\n[সে (মা) কি এমনি মায়ের মেয়ে ](%E0%A6%B8%E0%A7%87%20(%E0%A6%AE%E0%A6%BE)%20%E0%A6%95%E0%A6%BF%20%E0%A6%8F%E0%A6%AE%E0%A6%A8%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%AE%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A7%87%2029178778907c803db402ca1e16cdf73d.md)\n[হর ঊরে কেন অভয় চরণ](%E0%A6%B9%E0%A6%B0%20%E0%A6%8A%E0%A6%B0%E0%A7%87%20%E0%A6%95%E0%A7%87%E0%A6%A8%20%E0%A6%85%E0%A6%AD%E0%A6%AF%E0%A6%BC%20%E0%A6%9A%E0%A6%B0%E0%A6%A3%2029178778907c80b59347c16c440e0c49.md)\n[হের হর-মনোমোহিনী কে বলে রে কাল মেয়ে](%E0%A6%B9%E0%A7%87%E0%A6%B0%20%E0%A6%B9%E0%A6%B0-%E0%A6%AE%E0%A6%A8%E0%A7%8B%E0%A6%AE%E0%A7%8B%E0%A6%B9%E0%A6%BF%E0%A6%A8%E0%A7%80%20%E0%A6%95%E0%A7%87%20%E0%A6%AC%E0%A6%B2%E0%A7%87%20%E0%A6%B0%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B2%20%E0%A6%AE%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A7%87%2029178778907c8063a309d656564a9a11.md)\n[যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে](%E0%A6%AF%E0%A6%A4%E0%A6%A8%E0%A7%87%20%E0%A6%B9%E0%A7%83%E0%A6%A6%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%B0%E0%A7%87%E0%A6%96%E0%A7%8B,%20%E0%A6%86%E0%A6%A6%E0%A6%B0%E0%A6%BF%E0%A6%A3%E0%A7%80%20%E0%A6%B6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AE%E0%A6%BE%20%E0%A6%AE%E0%A6%BE%E0%A6%95%E0%A7%87%2029178778907c80b79d2ded0c98fde917.md)\n[রাগ ম্যাপিং](%E0%A6%B0%E0%A6%BE%E0%A6%97%20%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%E0%A6%BF%E0%A6%82%2029978778907c80248fd7eea1b2bc8c2d.md)"
+  },
+  {
+    "id": "song-59",
+    "title": "সদানন্দময়ী কালী, মহাকালের মনোমোহিনী",
+    "raag": "মনোহরসাহী",
+    "taal": "ঝাঁপতাল",
+    "composer": "কমলাকান্ত",
+    "lyrics": "সদানন্দময়ী কালী, মহাকালের মনোমোহিনী গো মা ।\nতুমি আপনি নাচ আপনি গাও আপনি দাও মা করতালি ।।\nআদিভূতা সনাতনী শূন্যরূপা শশী-ভালী।\nব্রহ্মাণ্ড ছিল না যখন, মুণ্ডমালা কোথায় পেলি ।।\nসবে মাত্র তুমি যন্ত্রী, যন্ত্র আমরা তন্ত্রে চলি ।\nতুমি যেমন রাখ তেমনি থাকি (মা), যেমনি বলাও তেমনি-বলি ।।\nঅশান্ত কমলাকান্ত দিয়ে বলে গালাগালি।\nএবার সর্বনাশী, ধরে অসি, ধর্মাধর্ম দুটোই খেলি ।।"
+  },
+  {
+    "id": "song-60",
+    "title": "সমরে নাচে রে কার এ রমণী",
+    "raag": "খাম্বাজ",
+    "taal": "আদ্ধা কাওয়ালী",
+    "composer": "প্রচলিত",
+    "lyrics": "সমরে নাচে রে কার এ রমণী\nনাশিছে তিমিরে তিমির বরণী ।।\nহুহুঙ্কার রবে মগনা তাণ্ডবে,\nচমকে দমকে যেন রে দামিনী ।।\nঅট্ট অট্ট হাসি সমর উল্লাসি,\nদিতিসূত নাশে দনুজদলনী ।।\nঅসুর সংহারে অসির প্রহারে,\nবরাভয় করে সৃজন-পালিনী ।।\nবামা ভয়ঙ্করা ভীষণে মধুরা,\nহরমনোহরা মানসমোহিনী\nসংসার অরণ্যে অনন্যশরণ্যে,\nশ্রীরামপ্রসন্নে শরণদায়িনী ।।"
+  },
+  {
+    "id": "song-61",
+    "title": "সিংহচারী খপথ ধাওয়ে",
+    "raag": "ইমন কল্যাণ",
+    "taal": "তেওরা",
+    "composer": "প্রচলিত",
+    "lyrics": "সিংহচারী খপথ ধাওয়ে, অসুর-সুরগণ গগনে ছাওয়ে\nরক্ত-বীজ-মারী করে রুধির ধারে ।।\nইন্দ্র চন্দ্র করত ধ্যান, ভয়ে ধরণী কম্পমান,\nআওয়ে হরি শঙ্খ নাদে সকল চরণ পাওয়ে ।।\nব্রহ্মা হরি হর ধরণী অম্বর, সিদ্ধ কিন্নর সজল জলধর,\nজ্যোতিঃ সঞ্চারে ।।"
+  },
+  {
+    "id": "song-62",
+    "title": "সে (মা) কি এমনি মায়ের মেয়ে",
+    "raag": "জংলা",
+    "taal": "একতাল",
+    "composer": "রামপ্রসাদ",
+    "lyrics": "সে (মা) কি এমনি মায়ের মেয়ে ।\nযার নাম জপিয়ে মহেশ বাঁচেন হলাহল খাইয়ে ।।\nসৃষ্টি স্থিতি প্রলয় করেন মা কটাক্ষে হেরিয়ে ।\nসে যে অনন্ত ব্রহ্মাণ্ড রাখে উদরে পুরিয়ে ।।\nযে চরণে শরণ লয়ে দেবতা বাঁচেন দায়ে ।\nদেবের দেব মহাদেব যাঁর চরণে লুটায়ে ।।\nপ্রসাদ বলে রণে চলে রণময়ী হয়ে ।\nশুভ নিশুম্ভকে বধে হুঙ্কার ছাড়িয়ে ।।"
+  },
+  {
+    "id": "song-63",
+    "title": "হর ঊরে কেন অভয় চরণ",
+    "raag": "ঝিঁঝিট খাম্বাজ",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "হর ঊরে কেন অভয় চরণ, মম শিরে মাগো দাওনা ।\nভোলাই শুধু কি তোর এত আপনার, আমি কি তোমার কেউ না ।।\nশব হয় শিব শ্রীপদপরশে, তবে আমি মাগো এতই ঘৃণ্য কিসে,\nচিদানন্দময়ী স্নেহভাষে হেসে, চাও চাও ফিরে চাও না ।।\nতমোময়ী, অমানিশা ভালবাস, আঁধার হৃদয়ে স্বরূপ প্রকাশ,\nমহামায়ে মায়ামোহতমো নাশ, দাও জ্ঞান সুধা পিয়াও না ।।\nলহ লহ জিহ্বা করিয়া বিস্তার, এস, ধর, পিও হৃদি রক্ত-ধার,\nদেহ প্রাণ মন সকলি তোমার, নিজ গুণে এসে লও না ।।\nবিধি বিষ্ণু শিব নাহি পান যাঁয়, আমি ক্ষুদ্র কিসে তুষিব তোমায়\nনা হলে করুণা, কেবা তোমা পায়, তনয়ে সদয়া হও না ।"
+  },
+  {
+    "id": "song-64",
+    "title": "হের হর-মনোমোহিনী কে বলে রে কাল মেয়ে",
+    "raag": "শঙ্করা",
+    "taal": "একতাল",
+    "composer": "প্রচলিত",
+    "lyrics": "হের হর-মনোমোহিনী কে বলে রে কাল মেয়ে।\n(আমার) মায়ের রূপে ভুবন আলো, চোখ থাকে তো দেখনা চেয়ে ।।\nবিমল হাসি ক্ষরে শশী, অরুণ পড়ে নখে খসি,\nএলোকেশী শ্যামা ষোড়শী;\nকমলভ্রমে ভ্রমর ভ্রমে, বিভোর ভোলা চরণ পেয়ে ।।"
+  }
+];
 
     let currentFilter = { raag: "", taal: "", search: "" };
 
@@ -470,8 +827,8 @@
     }
 
     function populateDropdowns() {
-      const raags = [...new Set(songs.map(s => s.raag))].sort();
-      const taals = [...new Set(songs.map(s => s.taal))].sort();
+      const raags = [...new Set(songs.map(s => s.raag).filter(r => r !== "অনির্দিষ্ট"))].sort();
+      const taals = [...new Set(songs.map(s => s.taal).filter(t => t !== "অনির্দিষ্ট"))].sort();
 
       const raagSelect = document.getElementById("raag-filter");
       const taalSelect = document.getElementById("taal-filter");
@@ -495,37 +852,17 @@
                               song.raag.toLowerCase().includes(q) || 
                               song.taal.toLowerCase().includes(q) || 
                               song.composer.toLowerCase().includes(q) ||
-                              song.summary.toLowerCase().includes(q);
+                              song.lyrics.toLowerCase().includes(q);
         return matchesRaag && matchesTaal && matchesSearch;
       });
 
       document.getElementById("song-count").innerText = `${filtered.length}টি গান`;
 
-      // Update Active Filter Badge
-      const indicator = document.getElementById("filter-indicator");
-      const filterText = document.getElementById("active-filter-text");
-      if (currentFilter.raag || currentFilter.taal) {
-        indicator.style.display = "inline-flex";
-        filterText.innerText = [
-          currentFilter.raag ? `রাগ: ${currentFilter.raag}` : "",
-          currentFilter.taal ? `তাল: ${currentFilter.taal}` : ""
-        ].filter(Boolean).join(" | ");
-      } else {
-        indicator.style.display = "none";
-      }
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="no-results">কোনো পদ পাওয়া যায়নি। ফিল্টার পরিবর্তন করুন।</div>`;
-        return;
-      }
-
-      filtered.forEach((song, idx) => {
-        // Nav Item
+      filtered.forEach((song) => {
         const li = document.createElement("li");
         li.innerHTML = `<a href="#${song.id}">${song.title}</a>`;
         navList.appendChild(li);
 
-        // Song Card
         const card = document.createElement("article");
         card.className = "song-card";
         card.id = song.id;
@@ -533,16 +870,12 @@
           <div class="song-header">
             <h3 class="song-title">${song.title}</h3>
             <div class="song-meta-tags">
-              <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')" title="রাগে ফিল্টার করুন">রাগ: ${song.raag}</span>
-              <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')" title="তালে ফিল্টার করুন">তাল: ${song.taal}</span>
-              <span class="tag tag-composer" title="রচয়িতা">${song.composer}</span>
+              <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')">রাগ: ${song.raag}</span>
+              <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')">তাল: ${song.taal}</span>
+              <span class="tag tag-composer">${song.composer}</span>
             </div>
           </div>
-          <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1rem;"><em>ভাবার্থ:</em> ${song.summary}</p>
-          <div class="lyrics">${song.lyricsSample}</div>
-          <p style="margin-top:0.8rem; font-size:0.88rem; color:var(--text-muted);">
-            সম্পূর্ণ পদটি গুগলে খুঁজে পড়তে পারেন: <em>"${song.title}"</em>
-          </p>
+          <div class="lyrics">${song.lyrics}</div>
           <div class="card-footer">
             <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
           </div>
@@ -551,7 +884,6 @@
       });
     }
 
-    // Interactive Tag/Menu Handlers
     function filterByTag(type, value) {
       if (type === 'raag') {
         currentFilter.raag = value;
