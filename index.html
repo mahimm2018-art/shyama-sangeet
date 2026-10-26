@@ -3,18 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ভক্তিমূলক সঙ্গীত সংগ্রহ</title>
+  <title>শ্যামাসঙ্গীত ও ভক্তিমূলক গীতি সংকলন</title>
+  
+  <!-- Bengali Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Galada&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #faf8f5;
+      --primary: #8b1e0f;
+      --primary-light: #fbeee9;
+      --accent: #b33927;
+      --tag-raag: #7c2d12;
+      --tag-raag-bg: #ffedd5;
+      --tag-taal: #1e3a8a;
+      --tag-taal-bg: #dbeafe;
+      --bg: #f8f6f0;
       --card-bg: #ffffff;
-      --text: #2c2523;
-      --accent: #8b1e0f;
-      --border: #e8e2d9;
-      --sidebar-width: 300px;
+      --text: #2a2220;
+      --text-muted: #6b5e59;
+      --border: #e6dfd5;
+      --sidebar-width: 320px;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     }
 
     * {
@@ -44,460 +55,534 @@
       flex-direction: column;
       padding: 1.5rem 1rem;
       overflow-y: auto;
+      z-index: 10;
     }
 
-    #sidebar h2 {
-      font-size: 1.25rem;
-      color: var(--accent);
+    .sidebar-header {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
       margin-bottom: 1rem;
     }
 
-    #search {
+    .sidebar-header h2 {
+      font-size: 1.35rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .song-counter {
+      font-size: 0.85rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    #sidebar-search {
       width: 100%;
-      padding: 0.6rem 0.8rem;
+      padding: 0.65rem 0.85rem;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-family: inherit;
       font-size: 0.95rem;
-      margin-bottom: 1rem;
+      outline: none;
+      margin-top: 0.75rem;
+      transition: border-color 0.2s;
+    }
+
+    #sidebar-search:focus {
+      border-color: var(--primary);
     }
 
     #nav-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.35rem;
+      overflow-y: auto;
     }
 
-    #nav-list a {
+    #nav-list li a {
       text-decoration: none;
       color: var(--text);
-      font-size: 0.95rem;
-      padding: 0.4rem 0.6rem;
-      border-radius: 4px;
+      font-size: 0.92rem;
+      padding: 0.5rem 0.65rem;
+      border-radius: 6px;
       display: block;
-      transition: background 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s;
     }
 
-    #nav-list a:hover {
-      background-color: #f2ece4;
-      color: var(--accent);
+    #nav-list li a:hover {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding-left: 0.85rem;
     }
 
-    /* Main Content Area */
+    /* Main Container */
     main {
       flex: 1;
-      padding: 3rem 5%;
-      max-width: 900px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
     }
 
-    header {
-      margin-bottom: 3rem;
+    /* Hero Banner */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      background-image: linear-gradient(to bottom, rgba(42, 34, 32, 0.45), rgba(42, 34, 32, 0.85)), 
+                        url('https://lh3.googleusercontent.com/d/1PnxPOsp203TFVu1aBXjKFHh7p21CI8Ng');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
       text-align: center;
+      padding: 1.5rem;
     }
 
-    header h1 {
-      color: var(--accent);
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
+    .hero-banner h1 {
+      font-family: 'Galada', cursive, 'Noto Serif Bengali', serif;
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      margin-bottom: 0.25rem;
     }
 
+    .hero-banner p {
+      font-size: 1.15rem;
+      opacity: 0.92;
+      max-width: 650px;
+    }
+
+    /* Filter & Controls Toolbar */
+    .controls-bar {
+      max-width: 950px;
+      width: 92%;
+      margin: -1.75rem auto 2rem auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.75rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 5;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .filter-select {
+      padding: 0.5rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background-color: #fff;
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .filter-select:focus {
+      border-color: var(--primary);
+    }
+
+    .active-filter-badge {
+      display: none;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .reset-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      text-decoration: underline;
+    }
+
+    /* Content Area */
+    .content-area {
+      max-width: 950px;
+      width: 92%;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    /* Song Card */
     .song-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2.5rem;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      border-radius: 10px;
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
       scroll-margin-top: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .meta {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--accent);
+    .song-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .song-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
       border-bottom: 1px dashed var(--border);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .song-title {
+      font-size: 1.45rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .song-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      user-select: none;
+    }
+
+    .tag:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .tag-raag {
+      background-color: var(--tag-raag-bg);
+      color: var(--tag-raag);
+      border: 1px solid #fed7aa;
+    }
+
+    .tag-taal {
+      background-color: var(--tag-taal-bg);
+      color: var(--tag-taal);
+      border: 1px solid #bfdbfe;
+    }
+
+    .tag-composer {
+      background-color: #f3e8ff;
+      color: #6b21a8;
+      border: 1px solid #e9d5ff;
     }
 
     .lyrics {
       white-space: pre-line;
       font-size: 1.15rem;
-      letter-spacing: 0.02em;
+      color: #332a28;
+      line-height: 2.1;
+      padding-left: 0.5rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f7f3ee;
     }
 
     .top-link {
-      display: inline-block;
-      margin-top: 1.5rem;
       font-size: 0.85rem;
       text-decoration: none;
-      color: #777;
+      color: var(--text-muted);
+      transition: color 0.2s;
     }
 
     .top-link:hover {
-      color: var(--accent);
+      color: var(--primary);
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 800px) {
+    .no-results {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
       body {
         flex-direction: column;
       }
       #sidebar {
         width: 100%;
         height: auto;
+        max-height: 280px;
         position: relative;
         border-right: none;
         border-bottom: 1px solid var(--border);
       }
-      main {
-        padding: 2rem 1rem;
+      .controls-bar {
+        margin-top: 1rem;
       }
-      .song-card {
-        padding: 1.5rem;
+      .hero-banner {
+        height: 220px;
+      }
+      .hero-banner h1 {
+        font-size: 2.1rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Panel -->
+  <!-- Navigation Sidebar -->
   <aside id="sidebar">
-    <h2>সূচিপত্র</h2>
-    <input type="text" id="search" placeholder="অনুসন্ধান করুন..." onkeyup="filterSongs()">
-    <ul id="nav-list">
-      <li><a href="#song-1">১. আশাবাস ঘোর-তমোনাশা বামা কে</a></li>
-      <li><a href="#song-2">২. মা আছেন আর আমি আছি</a></li>
-      <li><a href="#song-3">৩. আমার মাকে কি দেখেছিস্ তোরা</a></li>
-      <li><a href="#song-4">৪. আমার মা ত্বং হি তারা</a></li>
-      <li><a href="#song-5">৫. আর কিছু নাই সংসারের মাঝে</a></li>
-      <li><a href="#song-6">৬. হর ডরে কেন অভয় চরণ</a></li>
-      <li><a href="#song-7">৭. ওমা ভবভয়বারিণী</a></li>
-      <li><a href="#song-8">৮. ওঁ সর্বমঙ্গলমঙ্গল্যে</a></li>
-      <li><a href="#song-9">৯. কলুষ নাশিনী তারা</a></li>
-      <li><a href="#song-10">১০. সে (মা) কি এমনি মায়ের মেয়ে</a></li>
-      <li><a href="#song-11">১১. দুর্গে দলনী দুঃখ</a></li>
-      <li><a href="#song-12">১২. নমামি ত্বং তারিণী</a></li>
-      <li><a href="#song-13">১৩. নীলবরণী, নবীনা রমণী</a></li>
-      <li><a href="#song-14">১৪. পঙ্কজ বনে রাত্রিদিনে</a></li>
-      <li><a href="#song-15">১৫. যতনে হৃদয়ে রেখো</a></li>
-      <li><a href="#song-16">১৬. রণবেশে হেসে হেসে ঐ বামা</a></li>
-      <li><a href="#song-17">১৭. শতকোটি-শশী হাসে</a></li>
-      <li><a href="#song-18">১৮. শ্যামা মা কি আমার কাল রে</a></li>
-      <li><a href="#song-19">১৯. সদানন্দময়ী কালী</a></li>
-      <li><a href="#song-20">২০. সিংহচারী থপথ ধাওয়ে</a></li>
-      <li><a href="#song-21">২১. হের হর-মনোমোহিনী</a></li>
-    </ul>
+    <div class="sidebar-header">
+      <h2>পদাবলী সূচী <span id="song-count" class="song-counter">০টি</span></h2>
+      <input type="text" id="sidebar-search" placeholder="গীতি বা পদ খুঁজুন..." oninput="handleSearch(this.value)">
+    </div>
+    <ul id="nav-list"></ul>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main Body -->
   <main>
-    <header>
-      <h1>ভক্তিমূলক সঙ্গীত সংকলন</h1>
-      <p>রাগ, তাল ও পদাবলী</p>
+    <!-- Hero Banner with Drive Image -->
+    <header class="hero-banner">
+      <h1>শ্যামাসঙ্গীত সংকলন</h1>
+      <p>শাস্ত্রীয় রাগ, তাল ও ভাবাশ্রিত ভক্তিমূলক পদাবলীর ডিজিটাল সংগ্রহাগার</p>
     </header>
 
-    <article id="song-1" class="song-card">
-      <div class="meta">বেহাগ — কাওয়ালী</div>
-      <div class="lyrics">আশাবাস ঘোর-তমোনাশা বামা কে (মোহিনী)।
-ঘোর ঘটা করিঘটা ব্রহ্মকটা ঠেকেছে।।
-রাপসী শিরসি শশী, হারোরসি এলোকেশী,
-মধ্যস্থলা সুধাচালা কুলবালা নাচিছে।।
-দ্রুত চলে আসা টলে, বাহুবলে দৈত্যদলে;
-ডাকে শিবা কব কিবা নিশি দিবা ক’রেছে।।
-ক্ষীণ-দীন ভাগ্যহীন দৃষ্টচিত্ত সুকঠিন;
-রামপ্রসাদে কালীর বাদে কি প্রমাদে ঠেকেছে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
+    <!-- Toolbar Filters -->
+    <section class="controls-bar">
+      <div class="filter-group">
+        <label for="raag-filter">রাগ:</label>
+        <select id="raag-filter" class="filter-select" onchange="filterByDropdown()">
+          <option value="">সকল রাগ</option>
+        </select>
 
-    <article id="song-2" class="song-card">
-      <div class="meta">লক্ষ্মী-খাম্বাজ — কাহারবা</div>
-      <div class="lyrics">মা আছেন আর আমি আছি ভাবনা কি আছে আমার।
-মায়ের হাতে খাই পরি, মা নিয়েছেন আমার ভার।।
-সংসার পাকে ঘোর বিপাকে যখন দেখবি অন্ধকার।
-অন্ধকারের বিপদ হ’তে মা যে করেছেন উদ্ধার।।
-(এত) ভুলে থাকি তবুও দেখি ভুলে না মা একটি বার।
-(বড়) স্নেহের আধার মা যে আমার, আমি যে মা’র, মা আমার।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
+        <label for="taal-filter">তাল:</label>
+        <select id="taal-filter" class="filter-select" onchange="filterByDropdown()">
+          <option value="">সকল তাল</option>
+        </select>
 
-    <article id="song-3" class="song-card">
-      <div class="meta">জংলা — দাদরা</div>
-      <div class="lyrics">আমার মাকে কি দেখেছিস্ তোরা বল্ সত্যি ক'রে।
-মায়ের নব নব নবরূপে ভুবন মন হরে।।
-মা তো আমার নয় রে কল্পনা ঐ দেখ্ চিন্ময়ী হাস্যবদনা,
-মায়ের স্নেহ-চক্ষে প্রেমবক্ষে অমিয় ঝরে।।
-হাসিমুখে করে ভুবন আলো, মায়ের কোলে শোভে ভক্তদল,
-মায়ের প্রসারিত প্রেমবাহু আমাদের তরে।।
-আয় রে আয় ও জগৎবাসী, তোরা দেখে যা একবার আসি,
-মোদের জননীর ও রূপরাশি পরাণ ভরে।
-(ও রূপ) যে দেখেছে সেই মজেছে জনমের তরে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
+        <div id="filter-indicator" class="active-filter-badge">
+          <span id="active-filter-text"></span>
+          <button class="reset-btn" onclick="resetFilters()">✕ বাতিল</button>
+        </div>
+      </div>
 
-    <article id="song-4" class="song-card">
-      <div class="meta">ভৈরবী — একতাল</div>
-      <div class="lyrics">আমার মা ত্বং হি তারা, তুমি ত্রিগুণধরা পরাৎপরা।
-আমি জানি মা ও দীনদয়াময়ী, তুমি দুর্গমেতে দুখহরা।।
-তুমি জলে তুমি স্থলে, তুমি আদিমূলে গো মা,
-আছ সর্বঘটে অঙ্কুটে, সাকার আকার নিরাকারা।।
-তুমি সন্ধ্যা তুমি গায়ত্রী, তুমি জগদ্ধাত্রী গো মা,
-তুমি অকূলের ত্রাণকর্ত্রী, সদা শিবের মনোহরা।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
+      <button class="reset-btn" onclick="resetFilters()">সব দেখান</button>
+    </section>
 
-    <article id="song-5" class="song-card">
-      <div class="meta">ছায়ানট — কাওয়ালী</div>
-      <div class="lyrics">আর কিছু নাই সংসারের মাঝে, কেবল শ্যামা সার রে।
-ধ্যান কালী জ্ঞান কালী প্রাণ কালী আমার রে।।
-আসিয়ে ভুবনে এ তনু ধারণে যাতনা না হয় কার রে।
-(একবার) হেরিলে ও কায়, সব দুঃখ যায়, এই গুণ শ্যামা মার রে।।
-এ ভবে এসেছে, কেহ সুখে আছে, পেয়ে শিরে রাজ্যভার।
-(আমার) দরিদ্রের ধন, ও রাঙা চরণ, গলায় করেছি হার রে।।
-কমলাকান্ত, হয়ে ভ্রান্ত, যাওয়া আসা বারবার রে।
-(মায়ের) অভয় চরণ, লহরে শরণ, অনায়াসে পাবি পার রে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-6" class="song-card">
-      <div class="meta">ঝিঁঝিট খাম্বাজ — একতাল</div>
-      <div class="lyrics">হর উরে কেন অভয় চরণ, মম শিরে মাগো দাওনা।
-ভোলাই শুধু কি তোর এত আপনার, আমি কি তোমার কেউ না।।
-শব হয় শিব শ্রীপদপরশে, তবে আমি মাগো এতই ঘৃণ্য কিসে,
-চিদানন্দময়ী স্নেহভ্রমে হেসে, চাও চাও ফিরে চাও না।।
-তমোময়ী, অমানিশা ভালবাস, আঁধার হৃদয়ে স্বরূপ প্রকাশ,
-মহামায়ে মায়ামোহতমো নাশ, দাও জ্ঞান সুধা পিয়াও না।।
-লহ লহ জিহ্বা করিয়া বিস্তার, এস, ধর, পিও হৃদি রক্ত-ধার,
-দেহ প্রাণ মন সকলি তোমার, নিজ গুণে এসে লও না।।
-বিধি বিষ্ণু শিব নাহি পান যাঁয়, আমি ক্ষুদ্র কিসে তুষিব তোমায়
-না হলে করুণা, কেবা তোমা পায়, তনয়ে সদয়া হও না।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-7" class="song-card">
-      <div class="meta">ইমন-কল্যাণ — চৌতাল</div>
-      <div class="lyrics">ওমা ভবভয়বারিণী, এলাম ভবে দেখা দে গো জননী,
-দিও না যাতনা ত্রিনয়না, দিবানিশি ভাসি দুঃখে গো তারিণী।।
-তব পদে এই মিনতি, না জানি জননী তোমার স্তুতি,
-গতিহীনের অতি মূঢ়মতি, কর দীনে ত্রাণ, ত্রাণকারিণি।।
-দাসের দোষ হর হর-মনোরমা, তনয়েরে ঘৃণা ক’র না গো উমা,
-এ পাপাত্মে গো অপাঙ্গে, কর কৃপা শ্যামাঙ্গিনী,
-এ রঙ্গভূমির রঙ্গ, কালস্রোতে হ’লে ভঙ্গ,
-প্রেমিকের না হয় আতঙ্ক, কর কৃপা কপালিনী।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-8" class="song-card">
-      <div class="meta">স্তোত্র</div>
-      <div class="lyrics">ওঁ সর্বমঙ্গলমঙ্গল্যে, শিবে, সর্বার্থসাধিকে।
-শরণ্যে, ত্র্যম্বকে, গৌরি, নারায়ণি নমোহস্তু তে।।
-
-সৃষ্টস্থিতিবিনাশানাং শক্তিভূতে সনাতনি।
-গুণাশ্রয়ে, গুণময়ে, নারায়ণি নমোহস্তু তে।।
-
-শরণাগত-দীনার্ত-পরিত্রাণ পরায়ণে।
-সর্বস্যার্তিহরে দেবি নারায়ণি নমোহস্তু তে।।
-
-জয় নারায়ণি নমোহস্তু তে, জয় নারায়ণি নমোহস্তু তে।
-জয় নারায়ণি নমোহস্তু তে, জয় নারায়ণি নমোহস্তু তে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-9" class="song-card">
-      <div class="meta">আড়ানা — তিনতাল</div>
-      <div class="lyrics">কলুষ নাশিনী তারা।
-জগত জননী পতিত পাবনী
-জগজন মনোহরা।।
-সৃজন-পালন-নিধন কারিণী
-জ্ঞান প্রেম ভক্তি দায়িনী,
-শরণাগত তারিণী জননী
-বরদা অভয়ঙ্করা।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-10" class="song-card">
-      <div class="meta">জংলা — একতাল</div>
-      <div class="lyrics">সে (মা) কি এমনি মায়ের মেয়ে।
-যার নাম জপিয়ে মহেশ বাঁচেন হলাহল খাইয়ে।।
-সৃষ্টি স্থিতি প্রলয় যার কটাক্ষে হেরিয়ে।
-সে যে অনন্ত ব্রহ্মাণ্ড রাখে উদরে পুরিয়ে।।
-যে চরণে শরণ লয়ে দেবতা বাঁচেন দায়ে।
-দেবের দেব মহাদেব যাঁর চরণে লুটায়ে।।
-প্রসাদ বলে রণে চলে রণময়ী হয়ে।
-শুভ নিশুম্ভকে বধে হুঙ্কার ছাড়িয়ে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-11" class="song-card">
-      <div class="meta">আড়ানা — ঝাঁপতাল</div>
-      <div class="lyrics">দুর্গে দলনী দুঃখ, দারিদ্র্যদহনী, দুষ্ট-বিদারিণী হর-শম্ভু-জায়া।।
-অসুর-সংহারিণী, রক্তবীজ-নাশিনী, দীন-অভয়বরা-সুর-নর-পায়া।।
-সংসার-তারিণী, তারা তরণীতে, উদ্ধরে কৃপালী, যো পরমা মায়া;
-সপ্তদ্বীপ নব খণ্ড ত্রৈলোক্য-ব্যাপিত যাচে সুযশ চারু আনন্দ-দায়া।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-12" class="song-card">
-      <div class="meta">মালকোষ — একতাল</div>
-      <div class="lyrics">নমামি ত্বং তারিণী
-নমামি ত্বং তারিণী
-ত্বং হি ব্রহ্মাণী, ত্বং হি রুদ্রাণী, মহেশ্বরী নারায়ণী
-বারাহী নারসিংহী অপরাজিতা কৌমারী
-অষ্টশক্তি রূপিণী
-নমামি ত্বং তারিণী!
-বিকট শ্বশান করেছ আলয়,
-আসন করেছ ঈশান হৃদয়
-এলায়ে দিয়েছ চিকুর জাল
-লোল রসনা বিকট দশনা শোণিত মেখেছ অঙ্গে
-ভীষণ আহবে ভীম হুঙ্কারে সেজেছ দানব দলনী।
-নমামি ত্বং তারিণী,
-করেতে শোভিত বরাভয় আর,
-শাণিত কৃপাণ নরশির
-কণ্ঠে দুলিছে মুণ্ডালী।
-কটিতে বদ্ধ বিকট কাঞ্চী নরশবকর নিকরে
-গগন চুম্বিছে উজ্জল কিরীট চরণে বাজিছে কিঙ্কিণী
-নমামি ত্বং তারিণী
-তুমি ভূমি ব্যোম তুমিই সলিল
-তুমিই অনিল তুমি বৈশ্বানর
-তুমিই মনোবুদ্ধি।।
-অহঙ্কার তোমার বিকার চিদানন্দ রূপিণী
-তোমা ছাড়া কিছু নাহি আর
-বিপুল বিশ্বব্যাপিনী।
-নমামি ত্বং তারিণী।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-13" class="song-card">
-      <div class="meta">খাম্বাজ — চৌতাল</div>
-      <div class="lyrics">নীলবরণী, নবীনা রমণী, নাগিনীজড়িত জটাবিভূষিণী;
-নীল নলিনী জিনি ত্রিনয়নী, নিখিলাম নিশানাথ-নিভাননী।।
-নিরমল-নিশাকর-কপালিনী, নিরুপমা ভালে পঞ্চরেখাশ্রেণী,
-নৃকর চারুংকর-সুশোভিনী, লোলরসনা করালবদনী।।
-নৃত্যে বেষ্টিত শার্দূলছাল, নীলপদ্ম করে, করেকরবাল,
-নৃমুণ্ড-খর্পর অপর দ্বিকরে, লম্বোদরী লম্বোদর প্রসবিনী;
-নিপতিত পতি শবরূপে পায়, নিগমে ইহার নিগূঢ় না পায়;
-বিস্তার পাইতে শিবের উপায়, নিত্যসিদ্ধা তারা নগেন্দ্রনন্দিনী।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-14" class="song-card">
-      <div class="meta">কামোদ — চৌতাল</div>
-      <div class="lyrics">পঙ্কজ বনে রাত্রিদিনে, কি রঙ্গ করিছ শিবা,
-সদা শিবসঙ্গে আনন্দে, আনন্দময়ী।।
-তুমি একা হ'য়েছ দ্বিধা, পরমপুরুষ প্রকৃতিনারী;
-কতই নামে কতই রূপ ধরি কত লীলা কর, লীলাময়ী।।
-সকল আকারে আছ মা অন্তরে, জানিতে না পারে জীব তোমারে,
-তুমিই নিত্যা নিরাকারা চিদানন্দ-ব্রহ্মময়ী;
-তুমি কৃপা কর যারে সেই তোমারে জানিতে পারে,
-প্রসীদ প্রসীদ প্রসীদ, দেবেশি,
-সাধকের হৃদিপদ্মে প্রকাশ, করুণাময়ী।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-15" class="song-card">
-      <div class="meta">কাংড়ালে — ঝাঁপতাল</div>
-      <div class="lyrics">যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে।
-মন তুই দেখ্ আর আমি দেখি, আর যেন কেউ নাহি দেখে।।
-কামাদিরে দিয়ে ফাঁকি, আয় মন বিরলে দেখি
-রসনারে সঙ্গে রাখি, সে যেন মা ব'লে ডাকে।।
-কুরুচি কুমন্ত্রী যত, নিকট হ'তে দিও নাক,
-জ্ঞান নয়নে প্রহরী রেখ, সে যেন সাবধানে থাকে।
-কমলাকান্তের মন ভাই আমার এক নিবেদন,
-দরিদ্রে পাইলে ধন, সে কি অযতনে রাখে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-16" class="song-card">
-      <div class="meta">মিশ্র বেহাগ — কাওয়ালী</div>
-      <div class="lyrics">রণবেশে হেসে হেসে ঐ বামা এসেছে।
-করে অসি পদে শশী কি রূপসী সেজেছে।।
-নয়নে অনল জ্বলে, নরশির শোভে গলে,
-দলিতে দনুদলে চলে চলে চলেছে।।
-রুধির লেগেছে গায়, নীল জলে জবা প্রায়,
-আঁখি না ফিরিতে চায়, কি সুখেতে মজেছে।
-আ মরি কি রূপ হায়, অরূপ উথলে তায়,
-সাধে কিরে ঐ পায় পশুপতি পড়েছে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-17" class="song-card">
-      <div class="meta">ভৈরবী — ঝাঁপতাল</div>
-      <div class="lyrics">শতকোটি-শশী হাসে (মায়ের) চরণ নখরে।
-আলো করে কালোরূপ (মায়ের), হৃদয় কন্দরে।।
-প্রীতির সাগর উছলে নয়নে, উজ্জ্বল কপোল প্রসন্ন বয়ানে।
-মনে হয় রাখি নয়নে নয়নে।
-(বাঁধি) হৃদি কারাগারে, তারে চিরদিন তরে।।
-বাঞ্ছা বাধা পড়ে হৃদয় মাঝারে, কোটি মনোহর হর মনোহরে,
-উরু চারু অতি চরণ যুগল, হৃদি বিয়াকুল করে।
-(তাহে) চাহে মিশিবারে।।
-এস এস অয়ি ভুবন মোহিনী সর্বস্ব আমার, আমার জননী।
-(মাগো) ফিরে চাও যদি কৃপা কর যদি
-পড়ুক অশনী শিরে—(আমি) লব সাধ করে।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-18" class="song-card">
-      <div class="meta">মিশ্র মল্লার — একতাল</div>
-      <div class="lyrics">শ্যামা মা কি আমার কাল রে।
-কালরূপে দিগশ্বরী হৃদিপদ্ম করে আলো রে।
-লোকে বলে কালী কাল, আমার মন তো বলে না কাল রে।।
-কখনও শ্বেত কখনও পীত, কখনও নীল লোহিত রে,
-(আমি) আগে নাহি জানি কেমন জননী, ভাবিয়ে জনম গেল রে।।
-কখনও পুরুষ কখনও প্রকৃতি, কখনও শূন্যরূপা রে,
-(মায়ের) এভাব ভাবিয়ে কমলাকান্ত, সহজে পাগল হ’ল রে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-19" class="song-card">
-      <div class="meta">মনোহরসাহী — ঝাঁপতাল</div>
-      <div class="lyrics">সদানন্দময়ী কালী, মহাকালের মনোমোহিনী গো মা।
-তুমি আপনি নাচ আপনি গাও আপনি দাও মা করতালি।।
-আদিভূতা সনাতনী শূন্যরূপা শশী-ভালী।
-ব্রহ্মাণ্ড ছিল না যখন, মুণ্ডমালা কোথায় পেলি।।
-সবে মাত্র তুমি যন্ত্রী, যন্ত্র আমরা তন্ত্রে চলি।
-তুমি যেমন রাখ তেমনি থাকি (মা), যেমনি বলাও তেমনি-বলি।।
-অশান্ত কমলাকান্ত দিয়ে বলে গালাগালি।
-এবার সর্বনাশী, ধরে অসি, ধর্মাধর্ম দুটোই খেলি।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-20" class="song-card">
-      <div class="meta">ইমন কল্যাণ — তেওরা</div>
-      <div class="lyrics">সিংহচারী থপথ ধাওয়ে, অসুর-সুরগণ গগনে ছাওয়ে
-রক্ত-বীজ-মারী করে রুধির ধারে।।
-ইন্দ্র চন্দ্র করত ধ্যান, ভয়ে ধরণী কম্পমান,
-আওয়ে হরি শঙ্খ নাদে সকল চরণ পাওয়ে।।
-ব্রহ্মা হরি হর ধরণী অম্বর, সিদ্ধ কিন্নর সজল জলধর,
-জ্যোতিঃ সম্ভারে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
-
-    <article id="song-21" class="song-card">
-      <div class="meta">শঙ্করা — একতাল</div>
-      <div class="lyrics">হের হর-মনোমোহিনী কে বলে রে কাল মেয়ে।
-(আমার) মায়ের রূপে ভুবন আলো, চোখ থাকে তো দেখনা চেয়ে।।
-বিমল হাসি ক্ষরে শশী, অরুণ পড়ে নখে খসি,
-এলোকেশী শ্যামা ষোড়শী;
-কমলভ্রমে ভ্রমর ভ্রমে, বিভোর ভোলা চরণ পেয়ে।।</div>
-      <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
-    </article>
+    <!-- Song List Container -->
+    <section class="content-area" id="song-container"></section>
   </main>
 
   <script>
-    function filterSongs() {
-      const query = document.getElementById('search').value.toLowerCase();
-      const navItems = document.querySelectorAll('#nav-list li');
-      const cards = document.querySelectorAll('.song-card');
+    // Repository Data: First 5 Songs (Ready for full 65 song expansion)
+    const songs = [
+      {
+        id: "song-1",
+        title: "আশাবাস ঘোর-তমোনাশা বামা কে",
+        raag: "বেহাগ",
+        taal: "কাওয়ালী",
+        composer: "রামপ্রসাদ",
+        summary: "দেবী কালিকার রণরঙ্গিণী মোহিনী রূপের বন্দনা এবং সংসারের মোহান্ধকার দূরীকরণে মায়ের অভয়প্রার্থনা।",
+        lyricsSample: "আশাবাস ঘোর-তমোনাশা বামা কে (মোহিনী)।\nঘোর ঘটা করিঘটা ব্রহ্মকটা ঠেকেছে।।\nরাপসী শিরসি শশী, হারোরসি এলোকেশী,\nমধ্যস্থলা সুধাচালা কুলবালা নাচিছে।।"
+      },
+      {
+        id: "song-2",
+        title: "মা আছেন আর আমি আছি",
+        raag: "লগ্নী-খাম্বাজ",
+        taal: "কাহারবা",
+        composer: "প্রচলিত",
+        summary: "মায়ের চিরন্তন আশ্রয়, অকৃত্রিম অপত্য স্নেহ এবং জীবনের সকল সংকট মোচনের গভীর আত্মনিবেদন।",
+        lyricsSample: "মা আছেন আর আমি আছি ভাবনা কি আছে আমার।\nমায়ের হাতে খাই পরি, মা নিয়েছেন আমার ভার।।\nসংসার পাকে ঘোর বিপাকে যখন দেখবি অন্ধকার।\nঅন্ধকারের বিপদ হ’তে মা যে করেছেন উদ্ধার।।"
+      },
+      {
+        id: "song-3",
+        title: "আমার মাকে কি দেখেছিস্ তোরা",
+        raag: "জংলা",
+        taal: "দাদরা",
+        composer: "প্রচলিত",
+        summary: "বিশ্ববাসীকে বিশ্বজননীর চিন্ময়ী হাসিমুখ ও প্রসারিত প্রেমবাহুর অমৃতরূপ দর্শনের আনন্দময় আহ্বান।",
+        lyricsSample: "আমার মাকে কি দেখেছিস্ তোরা বল্ সত্যি ক'রে।\nমায়ের নব নব নবরূপে ভুবন মন হরে।।\nমা তো আমার নয় রে কল্পনা ঐ দেখ্ চিন্ময়ী হাস্যবদনা,\nমায়ের স্নেহ-চক্ষে প্রেমবক্ষে অমিয় ঝরে।।"
+      },
+      {
+        id: "song-4",
+        title: "আমার মা ত্বং হি তারা",
+        raag: "ভৈরবী",
+        taal: "একতাল",
+        composer: "প্রচলিত",
+        summary: "তারামায়ের ত্রিগুণময়ী, পরাৎপরা এবং সর্বভূতে সাকার-নিরাকার ব্যাপ্তির পরম বৈদান্তিক স্তুতি।",
+        lyricsSample: "আমার মা ত্বং হি তারা, তুমি ত্রিগুণধরা পরাৎপরা।\nআমি জানি মা ও দীনদয়াময়ী, তুমি দুর্গমেতে দুখহরা।।\nতুমি জলে তুমি স্থলে, তুমি আদিমূলে গো মা,\nআছ সর্বঘটে অঙ্কুটে, সাকার আকার নিরাকারা।।"
+      },
+      {
+        id: "song-5",
+        title: "যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে",
+        raag: "কাংড়ালে",
+        taal: "ঝাঁপতাল",
+        composer: "কমলাকান্ত",
+        summary: "কামাদি রিপুদের ফাঁকি দিয়ে হৃদয়ের নিভৃতে পরম রত্নস্বরূপা শ্যামা মাকে পরম যত্নে আগলে রাখার সাধনাগীত।",
+        lyricsSample: "যতনে হৃদয়ে রেখো, আদরিণী শ্যামা মাকে।\nমন তুই দেখ্ আর আমি দেখি, আর যেন কেউ নাহি দেখে।।\nকামাদিরে দিয়ে ফাঁকি, আয় মন বিরলে দেখি\nরসনারে সঙ্গে রাখি, সে যেন মা ব'লে ডাকে।।"
+      }
+    ];
 
-      cards.forEach((card, index) => {
-        const text = card.innerText.toLowerCase();
-        const matches = text.includes(query);
-        card.style.display = matches ? 'block' : 'none';
-        navItems[index].style.display = matches ? 'block' : 'none';
+    let currentFilter = { raag: "", taal: "", search: "" };
+
+    function initPage() {
+      populateDropdowns();
+      renderApp();
+    }
+
+    function populateDropdowns() {
+      const raags = [...new Set(songs.map(s => s.raag))].sort();
+      const taals = [...new Set(songs.map(s => s.taal))].sort();
+
+      const raagSelect = document.getElementById("raag-filter");
+      const taalSelect = document.getElementById("taal-filter");
+
+      raags.forEach(r => raagSelect.innerHTML += `<option value="${r}">${r}</option>`);
+      taals.forEach(t => taalSelect.innerHTML += `<option value="${t}">${t}</option>`);
+    }
+
+    function renderApp() {
+      const container = document.getElementById("song-container");
+      const navList = document.getElementById("nav-list");
+      container.innerHTML = "";
+      navList.innerHTML = "";
+
+      const filtered = songs.filter(song => {
+        const matchesRaag = !currentFilter.raag || song.raag === currentFilter.raag;
+        const matchesTaal = !currentFilter.taal || song.taal === currentFilter.taal;
+        const q = currentFilter.search.toLowerCase();
+        const matchesSearch = !q || 
+                              song.title.toLowerCase().includes(q) || 
+                              song.raag.toLowerCase().includes(q) || 
+                              song.taal.toLowerCase().includes(q) || 
+                              song.composer.toLowerCase().includes(q) ||
+                              song.summary.toLowerCase().includes(q);
+        return matchesRaag && matchesTaal && matchesSearch;
+      });
+
+      document.getElementById("song-count").innerText = `${filtered.length}টি গান`;
+
+      // Update Active Filter Badge
+      const indicator = document.getElementById("filter-indicator");
+      const filterText = document.getElementById("active-filter-text");
+      if (currentFilter.raag || currentFilter.taal) {
+        indicator.style.display = "inline-flex";
+        filterText.innerText = [
+          currentFilter.raag ? `রাগ: ${currentFilter.raag}` : "",
+          currentFilter.taal ? `তাল: ${currentFilter.taal}` : ""
+        ].filter(Boolean).join(" | ");
+      } else {
+        indicator.style.display = "none";
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="no-results">কোনো পদ পাওয়া যায়নি। ফিল্টার পরিবর্তন করুন।</div>`;
+        return;
+      }
+
+      filtered.forEach((song, idx) => {
+        // Nav Item
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="#${song.id}">${song.title}</a>`;
+        navList.appendChild(li);
+
+        // Song Card
+        const card = document.createElement("article");
+        card.className = "song-card";
+        card.id = song.id;
+        card.innerHTML = `
+          <div class="song-header">
+            <h3 class="song-title">${song.title}</h3>
+            <div class="song-meta-tags">
+              <span class="tag tag-raag" onclick="filterByTag('raag', '${song.raag}')" title="রাগে ফিল্টার করুন">রাগ: ${song.raag}</span>
+              <span class="tag tag-taal" onclick="filterByTag('taal', '${song.taal}')" title="তালে ফিল্টার করুন">তাল: ${song.taal}</span>
+              <span class="tag tag-composer" title="রচয়িতা">${song.composer}</span>
+            </div>
+          </div>
+          <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:1rem;"><em>ভাবার্থ:</em> ${song.summary}</p>
+          <div class="lyrics">${song.lyricsSample}</div>
+          <p style="margin-top:0.8rem; font-size:0.88rem; color:var(--text-muted);">
+            সম্পূর্ণ পদটি গুগলে খুঁজে পড়তে পারেন: <em>"${song.title}"</em>
+          </p>
+          <div class="card-footer">
+            <a href="#sidebar" class="top-link">↑ সূচিপত্রে ফিরে যান</a>
+          </div>
+        `;
+        container.appendChild(card);
       });
     }
+
+    // Interactive Tag/Menu Handlers
+    function filterByTag(type, value) {
+      if (type === 'raag') {
+        currentFilter.raag = value;
+        document.getElementById("raag-filter").value = value;
+      } else if (type === 'taal') {
+        currentFilter.taal = value;
+        document.getElementById("taal-filter").value = value;
+      }
+      renderApp();
+    }
+
+    function filterByDropdown() {
+      currentFilter.raag = document.getElementById("raag-filter").value;
+      currentFilter.taal = document.getElementById("taal-filter").value;
+      renderApp();
+    }
+
+    function handleSearch(val) {
+      currentFilter.search = val;
+      renderApp();
+    }
+
+    function resetFilters() {
+      currentFilter = { raag: "", taal: "", search: "" };
+      document.getElementById("raag-filter").value = "";
+      document.getElementById("taal-filter").value = "";
+      document.getElementById("sidebar-search").value = "";
+      renderApp();
+    }
+
+    window.onload = initPage;
   </script>
 </body>
 </html>
